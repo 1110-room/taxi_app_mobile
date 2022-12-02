@@ -9,6 +9,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val intent = Intent(this, RideLineActivity::class.java)
+        startActivity(intent)
     }
 
     fun onClickProfile(view: View){
