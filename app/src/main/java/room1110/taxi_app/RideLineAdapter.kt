@@ -1,43 +1,50 @@
 package room1110.taxi_app
 
-import room1110.taxi_app.data.Ride
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.ArrayList
+import room1110.taxi_app.data.Ride
 
-class RideLineAdapter: RecyclerView.Adapter<RideLineAdapter.ViewHolder>() {
-    private val rideList = ArrayList<Ride>()
-    class ViewHolder(item: View): RecyclerView.ViewHolder(item) {
-        val textView: TextView
+class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
+{
+    class RideViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
+        private val dtFrom: TextView = itemView.findViewById(R.id.dtFrom)
+        private val price: TextView = itemView.findViewById(R.id.price)
+        private val membersCount: TextView = itemView.findViewById(R.id.membersCount)
 
-        init {
-            // Define click listener for the ViewHolder's View.
-            textView = item.findViewById(R.id.rideText)
+        private val addressFrom: TextView = itemView.findViewById(R.id.addressFrom)
+        private val addressTo: TextView = itemView.findViewById(R.id.addressTo)
+
+        private val owner: TextView = itemView.findViewById(R.id.owner)
+        private val member1: TextView = itemView.findViewById(R.id.member1)
+        private val member2: TextView = itemView.findViewById(R.id.member2)
+        private val member3: TextView = itemView.findViewById(R.id.member3)
+
+        fun bind(ride: Ride) {
+            dtFrom.text = ride.dtFrom.toString()
+            price.text = ride.price.toString()
+            membersCount.text = ride.members.size.toString()
+            addressFrom.text = ride.addressFrom
+            addressTo.text = ride.addressTo
+            owner.text = ride.owner.toString()
+            // доделать динамическое кол-во members
+//            member1.text = ride.members.
         }
     }
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        // Create a new view, which defines the UI of the list item
-        val view = LayoutInflater.from(viewGroup.context)
-            .inflate(R.layout.ride_line_item, viewGroup, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RideViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.ride_line_item, parent, false)
+        return RideViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.textView.text = rideList[position].toString()
+    override fun onBindViewHolder(holder: RideViewHolder, position: Int) {
+        val ride = rideList[position]
+        holder.bind(ride)
     }
 
-    override fun getItemCount(): Int {
-        return rideList.size
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addPlant(ride: Ride){
-        rideList.add(ride)
-        notifyDataSetChanged()
-    }
+    override fun getItemCount() = rideList.size
 }

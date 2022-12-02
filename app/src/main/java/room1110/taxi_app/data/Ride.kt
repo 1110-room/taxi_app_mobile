@@ -1,18 +1,44 @@
 package room1110.taxi_app.data
 
-class Ride(
-    private var id: Int, private var cost: Int, private var distance: Double
-    ) {
-    //    var taxiService: String,
-    //    var addressFrom: String,
-    //    var addressTo: String,
-    //    var dtFrom: Date,
-    //    var dtTo: Date,
-    //    var status: String,
-    //    var members: List<Int>,
-    //    var owner: Int
+import java.util.*
 
-    override fun toString(): String {
-        return "room1110.taxi_app.data.Ride(id=$id, cost=$cost, distance=$distance)"
+class Ride() {
+    var id: Long = 0
+    var price: Int = 0
+    var distance: Double = 0.0
+    var owner: Int = 0
+    lateinit var members: List<Int>
+    lateinit var addressFrom: String
+    lateinit var addressTo: String
+    lateinit var status: String
+    lateinit var taxiService: String
+    lateinit var dtFrom: Date
+    lateinit var dtTo: Date
+
+    constructor(
+        id: Long,
+        price: Int,
+        distance: Double,
+        addressFrom: String,
+        addressTo: String,
+        status: String,
+        taxiService: String,
+        dtFrom: Date,
+        dtTo: Date,
+        members: List<Int>,
+        owner: Int
+    ) : this() {
+        this.id = id
+        this.price = price
+        this.distance = distance
+        this.addressFrom = addressFrom
+        this.addressTo = addressTo
+        this.status = status
+        this.taxiService = taxiService
+        this.dtFrom = dtFrom
+        this.dtTo = dtTo
+        this.members = members
+        this.owner = owner
     }
+
 }
