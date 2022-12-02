@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">taxi_app</string>
+    <string name="Logout">Выйти</string>
+    <string name="profileButton">Профиль</string>
+    <string name="changeCardNumber">Изменить карту</string>
+    <string name="textView5">История поездок</string>
+
+
 </resources>
