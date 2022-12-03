@@ -1,4 +1,4 @@
-package room1110.taxi_app
+package room1110.taxi_app.activities
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.format.DateTimeFormatter
 

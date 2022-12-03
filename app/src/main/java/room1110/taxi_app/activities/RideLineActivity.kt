@@ -1,12 +1,14 @@
-package room1110.taxi_app
+package room1110.taxi_app.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.LocalDateTime
-import java.util.Date
 
 
 class RideLineActivity : AppCompatActivity() {
@@ -68,6 +70,11 @@ class RideLineActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rideLineRC)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = RideLineAdapter(rideList)
+    }
+
+    fun onClickRideItem(view: View){
+        var intent = Intent(this, RoomActivity::class.java)
+        startActivity(intent)
     }
 
 }
