@@ -9,13 +9,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val intent = Intent(this, RideLineActivity::class.java)
-        startActivity(intent)
+//        var authButt = findViewById<Button>(R.id.authButton)
+//        authButt.setBackgroundColor(Color.parseColor("#FFB300"))
+//        val intent = Intent(this, RideLineActivity::class.java)
+//        startActivity(intent)
     }
 
     fun onClickProfile(view: View){
-        val intent = Intent(this, Profile::class.java)
+        val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
     }
 }
