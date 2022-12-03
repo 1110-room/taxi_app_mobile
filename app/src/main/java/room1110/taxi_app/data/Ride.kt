@@ -1,19 +1,20 @@
 package room1110.taxi_app.data
 
-import java.util.*
+import java.time.LocalDateTime
 
 class Ride() {
     var id: Long = 0
     var price: Int = 0
     var distance: Double = 0.0
     var owner: Int = 0
+    var rideSize: Int = 0
     lateinit var members: List<Int>
     lateinit var addressFrom: String
     lateinit var addressTo: String
     lateinit var status: String
     lateinit var taxiService: String
-    lateinit var dtFrom: Date
-    lateinit var dtTo: Date
+    lateinit var dtFrom: LocalDateTime
+    lateinit var dtTo: LocalDateTime
 
     constructor(
         id: Long,
@@ -23,9 +24,10 @@ class Ride() {
         addressTo: String,
         status: String,
         taxiService: String,
-        dtFrom: Date,
-        dtTo: Date,
+        dtFrom: LocalDateTime,
+        dtTo: LocalDateTime,
         members: List<Int>,
+        rideSize: Int,
         owner: Int
     ) : this() {
         this.id = id
@@ -39,6 +41,7 @@ class Ride() {
         this.dtTo = dtTo
         this.members = members
         this.owner = owner
+        this.rideSize = rideSize
     }
 
 }
