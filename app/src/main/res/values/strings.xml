@@ -6,6 +6,8 @@
     <string name="profileButton">Профиль</string>
     <string name="changeCardNumber">Изменить карту</string>
     <string name="textView5">История поездок</string>
+    <string name="saveChangesButton">Сохранить изименения</string>
+    <string name="changeCardNumberText">Введите номер карты</string>
 
 
 </resources>

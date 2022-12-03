@@ -1,14 +1,17 @@
 package room1110.taxi_app
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import room1110.taxi_app.data.User
 
-class Profile : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     private val color = "#FFB300"
     private lateinit var profileText: TextView
     private lateinit var cardNumber: TextView
@@ -17,9 +20,10 @@ class Profile : AppCompatActivity() {
     private lateinit var logoutButton: Button
     private lateinit var changeCardNumberButton: Button
     private lateinit var avgReview: TextView
+    private var user = User()
 //    private var avgReview: Float = 0f
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
@@ -34,9 +38,13 @@ class Profile : AppCompatActivity() {
         logoutButton.setBackgroundColor(Color.parseColor(color))
         changeCardNumberButton.setBackgroundColor(Color.parseColor(color))
 
-        profileText.text = "Гарифуллин Дамир"
+        user.name = "Дамир"
+        user.surname = "Гарифуллин"
+        user.cardNumber = "1234567890123456"
 
-        cardNumber.text = 1234567890123456.toString()
+        profileText.text = user.name + " " + user.surname
+
+        cardNumber.text = user.cardNumber
 
         avatar.setImageResource(R.drawable.my_avatar)
     }
@@ -48,6 +56,11 @@ class Profile : AppCompatActivity() {
         avgReview = findViewById(R.id.avgReview)
         var review = 1.5f
         avgReview.text = "Средняя оценка: $review"
+    }
+
+    fun changeCardNumberClick(view: View){
+        val intent = Intent(this, EditCardNumberActivity::class.java)
+        startActivity(intent)
     }
 
 
