@@ -1,6 +1,7 @@
-package room1110.taxi_app.activities
+package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.format.DateTimeFormatter
 
-class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
+class RideLineAdapter(private val rideList: List<Ride>): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
 {
     class RideViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -31,8 +32,12 @@ class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapt
         @SuppressLint("SetTextI18n")
         fun bind(ride: Ride) {
             dtFrom.text = ride.dtFrom.format(DateTimeFormatter.ofPattern("HH:mm"))
-            price.text = ride.price.toString()
-            membersCount.text = "${ride.members.size}/${ride.rideSize}"
+            if (ride.price == 0) {
+                price.visibility = View.GONE
+            } else {
+                price.text = "${ride.price} ₽"
+            }
+            membersCount.text = "${ride.members.size + 1}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
             status.text = ride.status
