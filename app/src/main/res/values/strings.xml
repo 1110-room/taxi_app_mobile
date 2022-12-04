@@ -8,6 +8,8 @@
     <string name="textView5">История поездок</string>
     <string name="saveChangesButton">Сохранить изименения</string>
     <string name="changeCardNumberText">Введите номер карты</string>
+    <string name="roomText">ROOM</string>
+
 
 
 </resources>

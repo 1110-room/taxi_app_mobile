@@ -28,6 +28,16 @@ class RideLineActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ride_line)
 
+
+        val recyclerView: RecyclerView = findViewById(R.id.rideLineRC)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RideLineAdapter(rideList, this)
+    }
+
+    override fun onClickItem(ride: Ride){
+        var intent = Intent(this, RoomActivity::class.java)
+        startActivity(intent)
+    }
         rcView = findViewById(R.id.rideLineRC)
         api = Common.retrofitService
         rcView.layoutManager = LinearLayoutManager(this)

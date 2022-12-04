@@ -17,6 +17,20 @@
         android:theme="@style/Theme.Taxi_app"
         tools:targetApi="31">
         <activity
+            android:name=".activity.RoomActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.EditCardNumberActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activity.RideLineActivity"
             android:exported="false">
             <meta-data

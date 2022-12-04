@@ -12,12 +12,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        var authButt = findViewById<Button>(R.id.authButton)
 //        authButt.setBackgroundColor(Color.parseColor("#FFB300"))
-        val intent = Intent(this, RideLineActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, RideLineActivity::class.java)
+//        startActivity(intent)
     }
 
     fun onClickProfile(view: View){
         val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
+    }
+    fun onClickRideLine(view: View){
+        var intent = Intent(this, RideLineActivity::class.java)
         startActivity(intent)
     }
 }
