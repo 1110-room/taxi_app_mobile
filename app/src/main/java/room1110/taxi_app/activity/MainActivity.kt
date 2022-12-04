@@ -1,4 +1,4 @@
-package room1110.taxi_app.activities
+package room1110.taxi_app.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        var authButt = findViewById<Button>(R.id.authButton)
 //        authButt.setBackgroundColor(Color.parseColor("#FFB300"))
-//        val intent = Intent(this, RideLineActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, RideLineActivity::class.java)
+        startActivity(intent)
     }
 
     fun onClickProfile(view: View){
