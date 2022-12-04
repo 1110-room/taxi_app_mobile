@@ -1,4 +1,4 @@
-package room1110.taxi_app.activities
+package room1110.taxi_app.util
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.format.DateTimeFormatter
 
-class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
+class RideLineAdapter(private val rideList: ArrayList<Ride>, val listener: ItemListener): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
 {
     class RideViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -29,14 +29,17 @@ class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapt
         private val member3: ImageView = itemView.findViewById(R.id.member3)
 
         @SuppressLint("SetTextI18n")
-        fun bind(ride: Ride) {
+        fun bind(ride: Ride, listener: ItemListener) {
             dtFrom.text = ride.dtFrom.format(DateTimeFormatter.ofPattern("HH:mm"))
             price.text = ride.price.toString()
             membersCount.text = "${ride.members.size}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
             status.text = ride.status
-
+            itemView.setOnClickListener{
+                listener.onClickItem(ride)
+            }
+            // TODO
             // доделать динамическое кол-во members
 //            member1.text = ride.members.
         }
@@ -49,9 +52,15 @@ class RideLineAdapter(private val rideList: ArrayList<Ride>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: RideViewHolder, position: Int) {
+        holder
         val ride = rideList[position]
-        holder.bind(ride)
+        holder.bind(ride, listener)
     }
 
     override fun getItemCount() = rideList.size
+
+
+    interface ItemListener{
+        fun onClickItem(ride: Ride)
+    }
 }

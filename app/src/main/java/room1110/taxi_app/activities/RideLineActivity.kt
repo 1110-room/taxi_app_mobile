@@ -2,22 +2,25 @@ package room1110.taxi_app.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
+import room1110.taxi_app.util.RideLineAdapter
 import java.time.LocalDateTime
 
 
-class RideLineActivity : AppCompatActivity() {
+class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
+    val rideList = arrayListOf<Ride>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ride_line)
 
-        val rideList = arrayListOf<Ride>()
+//        val rideList = arrayListOf<Ride>()
         rideList.add(
             Ride(
                 1,
@@ -36,7 +39,7 @@ class RideLineActivity : AppCompatActivity() {
         )
         rideList.add(
             Ride(
-                1,
+                2,
                 111,
                 1.5,
                 "Кремлевская 35",
@@ -52,7 +55,7 @@ class RideLineActivity : AppCompatActivity() {
         )
         rideList.add(
             Ride(
-                1,
+                3,
                 90,
                 1.0,
                 "Кольцо",
@@ -69,12 +72,11 @@ class RideLineActivity : AppCompatActivity() {
 
         val recyclerView: RecyclerView = findViewById(R.id.rideLineRC)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = RideLineAdapter(rideList)
+        recyclerView.adapter = RideLineAdapter(rideList, this)
     }
 
-    fun onClickRideItem(view: View){
+    override fun onClickItem(ride: Ride){
         var intent = Intent(this, RoomActivity::class.java)
         startActivity(intent)
     }
-
 }

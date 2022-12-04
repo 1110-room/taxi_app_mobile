@@ -44,4 +44,7 @@ class Ride() {
         this.rideSize = rideSize
     }
 
+    override fun toString(): String {
+        return "id: $id"
+    }
 }
