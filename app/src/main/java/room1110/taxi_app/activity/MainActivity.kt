@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
     }
-
     fun onClickRideLine(view: View){
         var intent = Intent(this, RideLineActivity::class.java)
         startActivity(intent)

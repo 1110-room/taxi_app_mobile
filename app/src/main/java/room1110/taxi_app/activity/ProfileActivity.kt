@@ -55,7 +55,7 @@ class ProfileActivity : AppCompatActivity() {
         // TODO
         // из всех отзывов оставленных этому юзеру считаем средний
         avgReview = findViewById(R.id.avgReview)
-        var review = 1.5f
+        val review = 1.5f
         avgReview.text = "Средняя оценка: $review"
     }
 

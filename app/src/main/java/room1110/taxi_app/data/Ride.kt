@@ -1,50 +1,95 @@
 package room1110.taxi_app.data
 
+import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
-class Ride() {
-    var id: Long = 0
-    var price: Int = 0
-    var distance: Double = 0.0
-    var owner: Int = 0
-    var rideSize: Int = 0
-    lateinit var members: List<Int>
-    lateinit var addressFrom: String
-    lateinit var addressTo: String
-    lateinit var status: String
-    lateinit var taxiService: String
-    lateinit var dtFrom: LocalDateTime
-    lateinit var dtTo: LocalDateTime
+data class Ride(
+    var id: Long,
+    var price: Int,
+    var distance: Double,
+    var owner: User,
+    var rideSize: Int,
+    var members: List<User>,
+    var addressFrom: String,
+    var addressTo: String,
+    var status: String,
+    var taxiService: String,
+    var dtFrom: LocalDateTime,
+    var dtTo: LocalDateTime?
+)
 
-    constructor(
-        id: Long,
-        price: Int,
-        distance: Double,
-        addressFrom: String,
-        addressTo: String,
-        status: String,
-        taxiService: String,
-        dtFrom: LocalDateTime,
-        dtTo: LocalDateTime,
-        members: List<Int>,
-        rideSize: Int,
-        owner: Int
-    ) : this() {
-        this.id = id
-        this.price = price
-        this.distance = distance
-        this.addressFrom = addressFrom
-        this.addressTo = addressTo
-        this.status = status
-        this.taxiService = taxiService
-        this.dtFrom = dtFrom
-        this.dtTo = dtTo
-        this.members = members
-        this.owner = owner
-        this.rideSize = rideSize
-    }
+data class RideSerialized(
+    @SerializedName("id") val id: Long,
+    @SerializedName("price") var price: Int,
+    @SerializedName("distance") var distance: Double,
+    @SerializedName("owner") var owner: User,
+    @SerializedName("ride_size") var rideSize: Int,
+    @SerializedName("members") var members: List<User>,
+    @SerializedName("address_from") var addressFrom: String,
+    @SerializedName("address_to") var addressTo: String,
+    @SerializedName("status") var status: String,
+    @SerializedName("taxi_service") var taxiService: String,
+    @SerializedName("dt_from") var dtFrom: String,
+    @SerializedName("dt_to") var dtTo: String?
+)
 
-    override fun toString(): String {
-        return "id: $id"
+class RideSerializer {
+    companion object {
+        fun serialize(ride: Ride): RideSerialized {
+            return RideSerialized(
+                ride.id,
+                ride.price,
+                ride.distance,
+                ride.owner,
+                ride.rideSize,
+                ride.members,
+                ride.addressFrom,
+                ride.addressTo,
+                ride.status,
+                ride.taxiService,
+                ride.dtFrom.toString(),
+                ride.dtTo.toString()
+            )
+        }
+
+        fun deserialize(ride: RideSerialized): Ride {
+            return Ride(
+                ride.id,
+                ride.price,
+                ride.distance,
+                ride.owner,
+                ride.rideSize,
+                ride.members,
+                ride.addressFrom,
+                ride.addressTo,
+                ride.status,
+                ride.taxiService,
+                LocalDateTime.parse(ride.dtFrom),
+                if (ride.dtTo != null) LocalDateTime.parse(ride.dtTo) else null
+            )
+        }
     }
 }
+
+/*
+[
+  {
+    "id": 1,
+    "price": 0,
+    "distance": 0.0,
+    "status": "OPEN",
+    "members": [],
+    "owner": {
+      "id": 1,
+      "name": "Максим",
+      "surname": "Абашин"
+    },
+    "ride_size": 4,
+    "taxi_service": "yandex",
+    "address_from": "ДУ 5",
+    "address_to": "Кремлевская 35",
+    "dt_from": "2022-11-30T15:44:40.928+00:00",
+    "dt_to": "2022-11-30T16:44:40.928+00:00"
+  }
+]
+*/
