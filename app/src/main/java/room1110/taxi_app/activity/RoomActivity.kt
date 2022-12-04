@@ -1,11 +1,8 @@
-package room1110.taxi_app.activities
+package room1110.taxi_app.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import room1110.taxi_app.R
-import room1110.taxi_app.data.Ride
-import room1110.taxi_app.util.RideLineAdapter
 
 class RoomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

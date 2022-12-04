@@ -1,4 +1,4 @@
-package room1110.taxi_app.activities
+package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
