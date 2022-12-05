@@ -1,9 +1,9 @@
-package room1110.taxi_app.activity
+package room1110.taxi_app.adapter
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,7 +12,7 @@ import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.format.DateTimeFormatter
 
-class RideLineAdapter(private val rideList: List<Ride>): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
+class RideLineAdapter(private val rideList: List<Ride>, private val listener: OnClickListener): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
 {
     class RideViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
@@ -30,7 +30,7 @@ class RideLineAdapter(private val rideList: List<Ride>): RecyclerView.Adapter<Ri
         private val member3: ImageView = itemView.findViewById(R.id.member3)
 
         @SuppressLint("SetTextI18n")
-        fun bind(ride: Ride) {
+        fun bind(ride: Ride, listener: OnClickListener) {
             dtFrom.text = ride.dtFrom.format(DateTimeFormatter.ofPattern("HH:mm"))
             if (ride.price == 0) {
                 price.visibility = View.GONE
@@ -42,6 +42,9 @@ class RideLineAdapter(private val rideList: List<Ride>): RecyclerView.Adapter<Ri
             addressTo.text = ride.addressTo
             status.text = ride.status
 
+            itemView.setOnClickListener{
+                listener.onClick(itemView)
+            }
             // доделать динамическое кол-во members
 //            member1.text = ride.members.
         }
@@ -55,8 +58,12 @@ class RideLineAdapter(private val rideList: List<Ride>): RecyclerView.Adapter<Ri
 
     override fun onBindViewHolder(holder: RideViewHolder, position: Int) {
         val ride = rideList[position]
-        holder.bind(ride)
+        holder.bind(ride, listener)
     }
 
     override fun getItemCount() = rideList.size
+
+    interface ItemListener{
+        fun onClickItem(view: View)
+    }
 }
