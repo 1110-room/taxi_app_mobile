@@ -3,10 +3,15 @@ package room1110.taxi_app.activity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,14 +34,27 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ride_line)
 
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+        refreshLayout.setOnRefreshListener {
+            updateRideList()
+            Handler().postDelayed(Runnable {
+                refreshLayout.isRefreshing = false
+            }, 500)
+        }
+
         rcView = findViewById(R.id.rideLineRC)
-        api = Common.retrofitService
         rcView.layoutManager = LinearLayoutManager(this)
-        getRideList()
+        api = Common.retrofitService
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        updateRideList()
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun getRideList() {
+    private fun updateRideList() {
         api.getRideList().enqueue(object : Callback<MutableList<RideSerialized>> {
             override fun onFailure(call: Call<MutableList<RideSerialized>>, t: Throwable) {
 //                adapter = RideLineAdapter(
@@ -71,9 +89,10 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
                 call: Call<MutableList<RideSerialized>>,
                 response: Response<MutableList<RideSerialized>>
             ) {
-                adapter = RideLineAdapter((response.body() as MutableList<RideSerialized>).map {
-                        rideSerialized -> RideSerializer.deserialize(rideSerialized)
-                }, this@RideLineActivity)
+                adapter =
+                    RideLineAdapter((response.body() as MutableList<RideSerialized>).map { rideSerialized ->
+                        RideSerializer.deserialize(rideSerialized)
+                    }, this@RideLineActivity)
                 adapter.notifyDataSetChanged()
                 rcView.adapter = adapter
             }
@@ -84,4 +103,5 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
         val intent = Intent(this, RoomActivity::class.java).putExtra("rode", ride)
         startActivity(intent)
     }
+
 }

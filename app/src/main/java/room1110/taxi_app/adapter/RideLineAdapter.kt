@@ -3,6 +3,7 @@ package room1110.taxi_app.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -43,7 +44,6 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
             itemView.setOnClickListener{
                 listener.onClickItem(ride)
             }
-
             // доделать динамическое кол-во members
 //            member1.text = ride.members.
         }
