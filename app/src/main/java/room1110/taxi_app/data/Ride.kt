@@ -3,7 +3,7 @@ package room1110.taxi_app.data
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
-data class Ride(
+class Ride(
     var id: Long,
     var price: Int,
     var distance: Double,
@@ -16,7 +16,13 @@ data class Ride(
     var taxiService: String,
     var dtFrom: LocalDateTime,
     var dtTo: LocalDateTime?
-)
+           ): java.io.Serializable {
+
+    override fun toString(): String {
+        return "Ride(id=$id, price=$price, distance=$distance, owner=$owner, rideSize=$rideSize, members=$members, addressFrom='$addressFrom', addressTo='$addressTo', status='$status', taxiService='$taxiService', dtFrom=$dtFrom, dtTo=$dtTo)"
+    }
+
+}
 
 data class RideSerialized(
     @SerializedName("id") val id: Long,

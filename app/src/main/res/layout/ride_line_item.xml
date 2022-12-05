@@ -145,20 +145,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="1dp"
-                android:text="добавить корону"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@+id/addressTo"
-                app:layout_constraintEnd_toStartOf="@+id/owner"
-                app:layout_constraintStart_toEndOf="@+id/addressFrom"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
