@@ -19,11 +19,12 @@ import room1110.taxi_app.R
 import room1110.taxi_app.adapter.RideLineAdapter
 import room1110.taxi_app.api.Common
 import room1110.taxi_app.api.RideApiInterface
+import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.RideSerialized
 import room1110.taxi_app.data.RideSerializer
 
 
-class RideLineActivity : AppCompatActivity(), OnClickListener {
+class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
     lateinit var api: RideApiInterface
     lateinit var adapter: RideLineAdapter
@@ -98,8 +99,8 @@ class RideLineActivity : AppCompatActivity(), OnClickListener {
         })
     }
 
-    override fun onClick(v: View?) {
-        val intent = Intent(this, RoomActivity::class.java)
+    override fun onClickItem(ride: Ride) {
+        val intent = Intent(this, RoomActivity::class.java).putExtra("rode", ride)
         startActivity(intent)
     }
 

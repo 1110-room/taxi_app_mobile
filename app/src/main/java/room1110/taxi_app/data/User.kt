@@ -1,6 +1,6 @@
 package room1110.taxi_app.data
 
-class User() {
+class User(): java.io.Serializable {
     var id: Long = 0
     var vkId: Long = 0
     var name: String = ""
