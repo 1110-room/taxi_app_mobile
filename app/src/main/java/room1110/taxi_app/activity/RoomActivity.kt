@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
+import room1110.taxi_app.databinding.ActivityMainBinding
 
 class RoomActivity : AppCompatActivity() {
     private lateinit var addressTo: TextView
