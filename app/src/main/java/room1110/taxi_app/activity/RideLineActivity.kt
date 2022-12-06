@@ -27,7 +27,7 @@ import room1110.taxi_app.data.RideSerializer
 
 class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
-    lateinit var api: RideApiInterface
+    private val api: RideApiInterface = Common.retrofitService
     lateinit var adapter: RideLineAdapter
     lateinit var rcView: RecyclerView
 
@@ -45,7 +45,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
         rcView = findViewById(R.id.rideLineRC)
         rcView.layoutManager = LinearLayoutManager(this)
-        api = Common.retrofitService
     }
 
     override fun onStart() {
@@ -101,7 +100,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
     }
 
     override fun onClickItem(ride: Ride?) {
-//        Log.d("item clicked", ride.toString())
         val intent = Intent(this, RoomActivity::class.java).putExtra("ride", ride)
         startActivity(intent)
     }

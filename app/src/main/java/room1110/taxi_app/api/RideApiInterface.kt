@@ -3,6 +3,7 @@ package room1110.taxi_app.api
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import room1110.taxi_app.data.RideSerialized
 import room1110.taxi_app.data.User
 
@@ -11,7 +12,7 @@ interface RideApiInterface {
     @GET("ride/open-line")
     fun getRideList(): Call<MutableList<RideSerialized>>
 
-//    @Headers("Accept: application/json")
-//    @GET("users/{id}")
-//    fun fwtUser(): Call<User>
+    @Headers("Accept: application/json")
+    @GET("users/{id}")
+    fun getUserById(@Path("id") id: Long): Call<User>
 }

@@ -10,8 +10,8 @@ class User(): java.io.Serializable {
     var ready: Boolean = false
     lateinit var ride: Ride
     lateinit var ownersRide: Ride
-    //    val receivedReviews: List<Review>? = null
-    //    var leavedReviews: MutableList<Review?>? = null
+    val receivedReviews: List<String?> = null
+    var leavedReviews: MutableList<String?> = null
 
     constructor(id: Long) : this() {
         this.id = id
@@ -30,5 +30,9 @@ class User(): java.io.Serializable {
         this.surname = surname
         this.cardNumber = cardNumber
         this.ready = false
+    }
+
+    override fun toString(): String {
+        return "User(id=$id, vkId=$vkId, name='$name', surname='$surname', cardNumber='$cardNumber', role='$role', ready=$ready, ride=$ride, ownersRide=$ownersRide)"
     }
 }
