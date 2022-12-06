@@ -37,7 +37,7 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
             } else {
                 price.text = "${ride.price} ₽"
             }
-            membersCount.text = "${ride.members.size + 1}/${ride.rideSize}"
+            membersCount.text = "${ride.membersCount}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
             status.text = ride.status
@@ -63,6 +63,6 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
     override fun getItemCount() = rideList.size
 
     interface ItemListener{
-        fun onClickItem(ride: Ride)
+        fun onClickItem(ride: Ride?)
     }
 }
