@@ -15,8 +15,10 @@ class Ride(
     var status: String,
     var taxiService: String,
     var dtFrom: LocalDateTime,
-    var dtTo: LocalDateTime?
+    var dtTo: LocalDateTime?,
            ): java.io.Serializable {
+
+    var membersCount: Int = members.size + 1
 
     override fun toString(): String {
         return "Ride(id=$id, price=$price, distance=$distance, owner=$owner, rideSize=$rideSize, members=$members, addressFrom='$addressFrom', addressTo='$addressTo', status='$status', taxiService='$taxiService', dtFrom=$dtFrom, dtTo=$dtTo)"
