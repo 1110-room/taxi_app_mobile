@@ -13,7 +13,7 @@ class RoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
         val ride = intent.getSerializableExtra("ride") as Ride
-        var text = findViewById<TextView>(R.id.Textt)
+        val text = findViewById<TextView>(R.id.Textt)
         text.text = ride.toString()
 
     }

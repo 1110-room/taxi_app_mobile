@@ -1,19 +1,23 @@
 package room1110.taxi_app.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 import java.time.format.DateTimeFormatter
 
-class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListener): RecyclerView.Adapter<RideLineAdapter.RideViewHolder>()
-{
+class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListener) :
+    RecyclerView.Adapter<RideLineAdapter.RideViewHolder>() {
     class RideViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         private val dtFrom: TextView = itemView.findViewById(R.id.dtFrom)
@@ -31,7 +35,7 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
 
         @SuppressLint("SetTextI18n")
         fun bind(ride: Ride, listener: ItemListener) {
-            dtFrom.text = ride.dtFrom.format(DateTimeFormatter.ofPattern("HH:mm"))
+            dtFrom.text = ride.getDtFrom()!!.format(DateTimeFormatter.ofPattern("HH:mm"))
             if (ride.price == 0) {
                 price.visibility = View.GONE
             } else {
@@ -40,12 +44,25 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
             membersCount.text = "${ride.members.size + 1}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
-            status.text = ride.status
-            itemView.setOnClickListener{
+            status.text = ride.owner.getAvatar().toString()
+
+            val avatarBytes = ride.owner.getAvatar()
+            if (avatarBytes != null) {
+                owner.setImageBitmap(byteArrayToBitmap(avatarBytes))
+                owner.setPadding(5)
+                owner.setBackgroundColor(Color.BLACK)
+            }
+
+            // доделать динамическое кол-во members
+            // member1.text = ride.members.
+
+            itemView.setOnClickListener {
                 listener.onClickItem(ride)
             }
-            // доделать динамическое кол-во members
-//            member1.text = ride.members.
+        }
+
+        private fun byteArrayToBitmap(data: ByteArray): Bitmap {
+            return BitmapFactory.decodeByteArray(data, 0, data.size)
         }
     }
 
@@ -62,7 +79,8 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
 
     override fun getItemCount() = rideList.size
 
-    interface ItemListener{
+    interface ItemListener {
         fun onClickItem(ride: Ride)
     }
+
 }
