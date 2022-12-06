@@ -4,18 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.adapter.RideLineAdapter
 import room1110.taxi_app.api.Common
-import room1110.taxi_app.api.ApiInterface
+import room1110.taxi_app.api.RideApiInterface
 import room1110.taxi_app.data.Ride
 
 

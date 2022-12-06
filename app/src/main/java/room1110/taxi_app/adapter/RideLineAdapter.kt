@@ -1,16 +1,14 @@
 package room1110.taxi_app.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
@@ -41,7 +39,7 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
             } else {
                 price.text = "${ride.price} ₽"
             }
-            membersCount.text = "${ride.members.size + 1}/${ride.rideSize}"
+            membersCount.text = "${ride.membersCount}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
             status.text = ride.owner.getAvatar().toString()
