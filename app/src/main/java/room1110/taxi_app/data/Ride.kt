@@ -42,33 +42,7 @@ class Ride(
     @SerializedName("dt_to")
     private var dtTo: String? = null
 
-    constructor(
-        id: Long,
-        price: Int,
-        distance: Double,
-        owner: User,
-        rideSize: Int,
-        members: List<User>,
-        addressFrom: String,
-        addressTo: String,
-        status: String,
-        taxiService: String,
-        dtFrom: String,
-        dtTo: String?
-    ) : this() {
-        this.id = id
-        this.price = price
-        this.distance = distance
-        this.owner = owner
-        this.rideSize = rideSize
-        this.members = members
-        this.addressFrom = addressFrom
-        this.addressTo = addressTo
-        this.status = status
-        this.taxiService = taxiService
-        this.dtFrom = dtFrom
-        this.dtTo = dtTo
-    }
+    var membersCount: Int = members.size + 1
 
     fun getDtFrom(): LocalDateTime? {
         return LocalDateTime.parse(dtFrom)
@@ -77,6 +51,34 @@ class Ride(
     fun getDtTo(): LocalDateTime? {
         return LocalDateTime.parse(dtTo)
     }
+
+    //    constructor(
+//        id: Long,
+//        price: Int,
+//        distance: Double,
+//        owner: User,
+//        rideSize: Int,
+//        members: List<User>,
+//        addressFrom: String,
+//        addressTo: String,
+//        status: String,
+//        taxiService: String,
+//        dtFrom: String,
+//        dtTo: String?
+//    ) : this() {
+//        this.id = id
+//        this.price = price
+//        this.distance = distance
+//        this.owner = owner
+//        this.rideSize = rideSize
+//        this.members = members
+//        this.addressFrom = addressFrom
+//        this.addressTo = addressTo
+//        this.status = status
+//        this.taxiService = taxiService
+//        this.dtFrom = dtFrom
+//        this.dtTo = dtTo
+//    }
 }
 
 //data class RideSerialized(
