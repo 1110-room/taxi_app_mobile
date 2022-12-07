@@ -14,6 +14,7 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
+import room1110.taxi_app.data.User
 import java.time.format.DateTimeFormatter
 
 class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListener) :
@@ -41,23 +42,32 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
             } else {
                 price.text = "${ride.price} ₽"
             }
-            membersCount.text = "${ride.membersCount}/${ride.rideSize}"
+            membersCount.text = "${ride.getMembersCount()}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo
-            status.text = ride.owner.getAvatar().toString()
+            status.text = ride.status
 
-            val avatarBytes = ride.owner.getAvatar()
-            if (avatarBytes != null) {
-                owner.setImageBitmap(byteArrayToBitmap(avatarBytes))
-                owner.setPadding(5)
-                owner.setBackgroundColor(Color.BLACK)
-            }
+            editAvatarBitmap(owner, ride.owner)
+            editAvatarBitmap(member1, ride.members.getOrNull(0))
+            editAvatarBitmap(member2, ride.members.getOrNull(1))
+            editAvatarBitmap(member3, ride.members.getOrNull(2))
 
             // доделать динамическое кол-во members
             // member1.text = ride.members.
 
             itemView.setOnClickListener {
                 listener.onClickItem(ride)
+            }
+        }
+
+        private fun editAvatarBitmap(userView: ImageView, user: User?) {
+            if (user != null) {
+                val avatarBytes = user.getAvatar()
+                if (avatarBytes != null) {
+                    userView.setImageBitmap(byteArrayToBitmap(avatarBytes))
+//                owner.setPadding(5)
+//                owner.setBackgroundColor(Color.BLACK)
+                }
             }
         }
 

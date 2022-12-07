@@ -3,9 +3,7 @@ package room1110.taxi_app.data
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
-class Ride(
-
-) : java.io.Serializable {
+class Ride() : java.io.Serializable {
     @SerializedName("id")
     var id: Long = 0
 
@@ -16,7 +14,7 @@ class Ride(
     var distance: Double = 0.0
 
     @SerializedName("owner")
-    lateinit var owner: User
+    var owner: User? = null
 
     @SerializedName("ride_size")
     var rideSize: Int = 0
@@ -42,7 +40,9 @@ class Ride(
     @SerializedName("dt_to")
     private var dtTo: String? = null
 
-    var membersCount: Int = members.size + 1
+    fun getMembersCount(): Int {
+        return members.size + 1
+    }
 
     fun getDtFrom(): LocalDateTime? {
         return LocalDateTime.parse(dtFrom)
@@ -52,7 +52,7 @@ class Ride(
         return LocalDateTime.parse(dtTo)
     }
 
-    //    constructor(
+//        constructor(
 //        id: Long,
 //        price: Int,
 //        distance: Double,
@@ -135,24 +135,23 @@ class Ride(
 //}
 
 /*
-[
-  {
+{
     "id": 1,
     "price": 0,
-    "distance": 0.0,
+    "distance": 9.0,
     "status": "OPEN",
     "members": [],
     "owner": {
       "id": 1,
-      "name": "Максим",
-      "surname": "Абашин"
+      "name": "Дамир",
+      "surname": "Гарифуллин",
+      "avatar": null
     },
     "ride_size": 4,
     "taxi_service": "yandex",
-    "address_from": "ДУ 5",
+    "address_from": "Деревня Универсиады 5",
     "address_to": "Кремлевская 35",
-    "dt_from": "2022-11-30T15:44:40.928+00:00",
-    "dt_to": "2022-11-30T16:44:40.928+00:00"
+    "dt_from": "2022-11-30T15:44:40",
+    "dt_to": null
   }
-]
 */
