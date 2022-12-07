@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CreateRideActivity">
+
+    <TextView
+        android:id="@+id/creationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/creationRide"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        app:layout_constraintEnd_toEndOf="@+id/creationTV"
+        app:layout_constraintStart_toStartOf="@+id/creationTV"
+        app:layout_constraintTop_toBottomOf="@+id/creationTV">
+
+        <TextView
+            android:id="@+id/sizeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/membersCount"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SeekBar
+            android:id="@+id/sizeSeekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="125dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="12dp"
+            android:max="2"
+            android:progress="2"
+            android:thumb="@drawable/users_4"
+            app:layout_constraintBottom_toBottomOf="@+id/sizeTV"
+            app:layout_constraintStart_toEndOf="@+id/sizeTV"
+            app:layout_constraintTop_toTopOf="@+id/sizeTV"
+            app:layout_constraintVertical_bias="0.333" />
+
+        <TextView
+            android:id="@+id/curSizeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="4"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/sizeSeekBar"
+            app:layout_constraintStart_toEndOf="@+id/sizeSeekBar"
+            app:layout_constraintTop_toTopOf="@+id/sizeSeekBar"
+            app:layout_constraintVertical_bias="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <EditText
+            android:id="@+id/addressFromEditText"
+            android:layout_width="260dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="15dp"
+            android:ems="10"
+            android:hint="@string/addressFromHint"
+            android:inputType="textPostalAddress"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@+id/addressFromTV"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addressFromTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addressFromText"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/addressFromEditText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/addressFromEditText" />
+
+        <EditText
+            android:id="@+id/addressToEditText"
+            android:layout_width="260dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="15dp"
+            android:ems="10"
+            android:hint="@string/addressToHint"
+            android:inputType="textPostalAddress"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/addressToTV"
+            app:layout_constraintStart_toEndOf="@+id/addressToTV"
+            app:layout_constraintTop_toTopOf="@+id/addressToTV" />
+
+        <TextView
+            android:id="@+id/addressToTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="@string/addressToText"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/addressFromTV"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/addressFromTV"
+            app:layout_constraintTop_toBottomOf="@+id/addressFromTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

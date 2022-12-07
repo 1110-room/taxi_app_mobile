@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.TextView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
-import room1110.taxi_app.databinding.ActivityMainBinding
 
 class RoomActivity : AppCompatActivity() {
     private lateinit var addressTo: TextView
@@ -24,7 +23,7 @@ class RoomActivity : AppCompatActivity() {
         if (ride != null){
             addressTo.text = ride.addressTo
             addressFrom.text = ride.addressFrom
-            members.text = "${ride.membersCount}/${ride.rideSize}"
+            members.text = "${ride.getMembersCount()}/${ride.rideSize}"
             price.text = ride.price.toString()
         }
 
