@@ -19,6 +19,7 @@
     <string name="addressFromHint">ул. Кремлевская 35</string>
     <string name="addressToText">Куда:</string>
     <string name="addressToHint">ул. Деревня Универсиады 5</string>
+    <string name="serviceText">Такси сервис:</string>
 
 
 </resources>
