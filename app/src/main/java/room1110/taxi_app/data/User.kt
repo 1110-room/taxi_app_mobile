@@ -7,7 +7,7 @@ class User() : java.io.Serializable {
     var vkId: Long = 0
     var name: String = ""
     var surname: String = ""
-    var cardNumber: String = ""
+    var cardNumber: String? = null
     var role: String = ""
     var ready: Boolean = false
     private var avatar: String? = null
@@ -25,7 +25,7 @@ class User() : java.io.Serializable {
         vkId: Long,
         name: String,
         surname: String,
-        cardNumber: String,
+        cardNumber: String?,
         role: String,
         avatar: String,
         ride: Ride,
@@ -44,7 +44,6 @@ class User() : java.io.Serializable {
     }
 
     fun getAvatar(): ByteArray? {
-//        return avatar?.toByteArray()
         return if (this.avatar != null)
             Base64.decode(this.avatar, Base64.DEFAULT)
         else

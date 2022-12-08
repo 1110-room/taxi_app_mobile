@@ -12,7 +12,14 @@
     <string name="from">Откуда:</string>
     <string name="to">Куда:</string>
     <string name="price">Цена:</string>
-
+    <string name="create">Создать</string>
+    <string name="membersCount">Кол-во человек:</string>
+    <string name="creationRide">Создание поездки</string>
+    <string name="addressFromText">Откуда:</string>
+    <string name="addressFromHint">ул. Кремлевская 35</string>
+    <string name="addressToText">Куда:</string>
+    <string name="addressToHint">ул. Деревня Универсиады 5</string>
+    <string name="serviceText">Такси сервис:</string>
 
 
 </resources>

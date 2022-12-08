@@ -4,10 +4,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-object RetrofitRide {
+object RetrofitBuilder {
     private var retrofit: Retrofit? = null
 
-    fun getRide(baseUrl: String): Retrofit {
+    fun generateConverter(baseUrl: String): Retrofit {
 
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
