@@ -28,10 +28,11 @@ class RideHistoryAdapter(private val rideList: List<Ride>, var listener: ItemLis
         fun bind(ride: Ride, listener: ItemListener) {
             dtFrom.text = ride.getDtFrom()!!.format(DateTimeFormatter.ofPattern("HH:mm"))
             if (ride.getDtTo() == null) {
-                price.visibility = View.INVISIBLE
+                dtTo.visibility = View.INVISIBLE
             } else {
                 dtTo.text = ride.getDtTo()?.format(DateTimeFormatter.ofPattern("HH:mm"))
             }
+            price.text = "${ride.price} ₽"
             membersCount.text = "${ride.getMembersCount()}/${ride.rideSize}"
             addressFrom.text = ride.addressFrom
             addressTo.text = ride.addressTo

@@ -19,7 +19,6 @@
             android:id="@+id/rideLineRC"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="onClick"
             android:textAlignment="center"
             app:flow_verticalAlign="baseline"
             app:layout_constraintEnd_toEndOf="parent"

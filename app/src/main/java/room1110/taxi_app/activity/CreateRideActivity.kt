@@ -25,7 +25,7 @@ import room1110.taxi_app.data.User
 class CreateRideActivity : AppCompatActivity() {
     private val taxiServices = arrayListOf("yandex")
 
-    private val api: ApiInterface = APIBuilder.apiService
+    private lateinit var api: ApiInterface
     private lateinit var seekBar: SeekBar
     private lateinit var addressFrom: EditText
     private lateinit var addressTo: EditText
@@ -37,6 +37,8 @@ class CreateRideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ride)
+
+        api = APIBuilder(baseContext).apiService
 
         // View Elements
         seekBar = findViewById(R.id.sizeSeekBar)

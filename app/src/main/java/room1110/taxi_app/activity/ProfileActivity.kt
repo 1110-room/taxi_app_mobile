@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +26,7 @@ import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 
 class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
-    private val api: ApiInterface = APIBuilder.apiService
+    private lateinit var api: ApiInterface
     private lateinit var adapter: RideHistoryAdapter
     private lateinit var rcView: RecyclerView
 
@@ -44,7 +46,11 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        api = APIBuilder(baseContext).apiService
+
         // View Elements
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+
         rcView = findViewById(R.id.historyRC)
         rcView.layoutManager = LinearLayoutManager(this)
 
@@ -67,6 +73,14 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         cardNumber.text = user.cardNumber
 
         avatar.setImageResource(R.drawable.my_avatar)
+
+        // Listeners
+        refreshLayout.setOnRefreshListener {
+            updateRideHistory()
+            Handler().postDelayed({
+                refreshLayout.isRefreshing = false
+            }, 500)
+        }
     }
 
     override fun onStart() {
@@ -77,11 +91,14 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         val review = 1.5f
         avgReview.text = "Средняя оценка: $review"
 
-        updateRideHistory(1)
+        updateRideHistory()
     }
 
     // API Requests
-    private fun updateRideHistory(userId: Long) {
+    private fun updateRideHistory() {
+        // Get User Id from Auth User
+        val userId: Long = 1
+
         api.getUserRideHistory(userId).enqueue(object : Callback<MutableList<Ride>> {
             override fun onFailure(call: Call<MutableList<Ride>>, t: Throwable) {
                 val dialog: AlertDialog = this@ProfileActivity.let {
