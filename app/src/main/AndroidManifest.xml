@@ -24,7 +24,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.RoomActivity"
+            android:name=".activity.RideActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

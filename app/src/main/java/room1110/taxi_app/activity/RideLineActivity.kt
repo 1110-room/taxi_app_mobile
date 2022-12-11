@@ -111,7 +111,7 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
     // Ride Item OnClick
     override fun onClickItem(ride: Ride) {
-        val intent = Intent(this, RoomActivity::class.java).putExtra("ride", ride)
+        val intent = Intent(this, RideActivity::class.java).putExtra("ride", ride)
         startActivity(intent)
     }
 }
