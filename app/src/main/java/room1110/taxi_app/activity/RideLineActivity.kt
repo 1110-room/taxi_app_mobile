@@ -22,13 +22,15 @@ import room1110.taxi_app.data.Ride
 
 class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
     // Global vars
-    private val api: ApiInterface = APIBuilder.apiService
+    private lateinit var api: ApiInterface
     lateinit var adapter: RideLineAdapter
     lateinit var rcView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ride_line)
+
+        api = APIBuilder(baseContext).apiService
 
         // View Elements
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
@@ -46,7 +48,7 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
         refreshLayout.setOnRefreshListener {
             updateRideList()
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed( {
                 refreshLayout.isRefreshing = false
             }, 500)
         }
