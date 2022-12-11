@@ -6,7 +6,7 @@ import android.widget.TextView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
 
-class RoomActivity : AppCompatActivity() {
+class RideActivity : AppCompatActivity() {
     private lateinit var addressTo: TextView
     private lateinit var addressFrom: TextView
     private lateinit var members: TextView
@@ -26,7 +26,6 @@ class RoomActivity : AppCompatActivity() {
             members.text = "${ride.getMembersCount()}/${ride.rideSize}"
             price.text = ride.price.toString()
         }
-
-
     }
+    
 }
