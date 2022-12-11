@@ -49,7 +49,10 @@ class Ride() : java.io.Serializable {
     }
 
     fun getDtTo(): LocalDateTime? {
-        return LocalDateTime.parse(dtTo)
+        return if (dtTo == null)
+            null
+        else
+            LocalDateTime.parse(dtTo)
     }
 
     override fun toString(): String {

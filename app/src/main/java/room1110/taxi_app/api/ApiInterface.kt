@@ -19,6 +19,10 @@ interface ApiInterface {
     @Headers("Accept: application/json")
     fun fwtUser(): Call<User>
 
+    @GET("ride/history/{user_id}")
+    @Headers("Accept: application/json")
+    fun getUserRideHistory(@Path("user_id") userId: Long): Call<MutableList<Ride>>
+
 
     // ----- POST -----
     @POST("ride/create")
