@@ -100,9 +100,7 @@ class CreateRideActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<Ride>,
                 response: Response<Ride>
-            ) {
-
-            }
+            ) {}
         })
     }
 

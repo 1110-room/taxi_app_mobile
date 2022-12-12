@@ -1,6 +1,7 @@
 package room1110.taxi_app.data
 
 import android.util.Base64
+import com.google.gson.annotations.SerializedName
 
 class User() : java.io.Serializable {
     var id: Long = 0
@@ -11,37 +12,36 @@ class User() : java.io.Serializable {
     var role: String = ""
     var ready: Boolean = false
     private var avatar: String? = null
-    lateinit var ride: Ride
-    lateinit var ownersRide: Ride
-//        val receivedReviews: List<Review>? = null
-//        var leavedReviews: MutableList<Review?>? = null
-
+    @SerializedName("rides")
+    lateinit var rides: List<Ride>
+    @SerializedName("receivedReviews")
+    lateinit var receivedReviews: List<String>
+    @SerializedName("leavedReviews")
+    lateinit var leavedReviews: List<String>
     constructor(id: Long) : this() {
         this.id = id
     }
 
-    constructor(
-        id: Long,
-        vkId: Long,
-        name: String,
-        surname: String,
-        cardNumber: String?,
-        role: String,
-        avatar: String,
-        ride: Ride,
-        ownersRide: Ride
-    ) : this() {
-        this.id = id
-        this.vkId = vkId
-        this.name = name
-        this.surname = surname
-        this.cardNumber = cardNumber
-        this.ready = false
-        this.role = role
-        this.avatar = avatar
-        this.ride = ride
-        this.ownersRide = ownersRide
-    }
+//    constructor(
+//        id: Long,
+//        vkId: Long,
+//        name: String,
+//        surname: String,
+//        cardNumber: String?,
+//        role: String,
+//        avatar: String,
+//        rides: List<Ride>,
+//    ) : this() {
+//        this.id = id
+//        this.vkId = vkId
+//        this.name = name
+//        this.surname = surname
+//        this.cardNumber = cardNumber
+//        this.ready = false
+//        this.role = role
+//        this.avatar = avatar
+//        this.rides = rides
+//    }
 
     fun getAvatar(): ByteArray? {
         return if (this.avatar != null)
@@ -51,8 +51,10 @@ class User() : java.io.Serializable {
     }
 
     override fun toString(): String {
-        return "User(id=$id, vkId=$vkId, name='$name', surname='$surname', cardNumber='$cardNumber', role='$role', ready=$ready, ride=$ride, ownersRide=$ownersRide)"
+        return "User(id=$id, vkId=$vkId, name='$name', surname='$surname', cardNumber='$cardNumber', role='$role', ready=$ready, avatar=$avatar, ride=$rides, receivedReviews=$receivedReviews, leavedReviews=$leavedReviews)"
     }
+
+
 }
 
 //data class UserSerialized(

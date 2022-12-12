@@ -1,32 +1,33 @@
 package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.adapter.RideLineAdapter
+import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
-import room1110.taxi_app.api.Common
 import room1110.taxi_app.data.Ride
 
 
 class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
-    lateinit var api: ApiInterface
+    var api: ApiInterface = APIBuilder.apiService
     lateinit var adapter: RideLineAdapter
     lateinit var rcView: RecyclerView
 
@@ -115,7 +116,7 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
     // Ride Item OnClick
     override fun onClickItem(ride: Ride) {
-        val intent = Intent(this, RoomActivity::class.java).putExtra("ride", ride)
+        val intent = Intent(this@RideLineActivity, RoomActivity::class.java).putExtra("ride", ride)
         startActivity(intent)
     }
 
