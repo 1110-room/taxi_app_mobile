@@ -17,10 +17,10 @@ class RideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room)
-        addressFrom = findViewById(R.id.roomAddressFrom)
-        addressTo = findViewById(R.id.roomAddressTo)
-        members = findViewById(R.id.members)
-        price = findViewById(R.id.roomPrice)
+        addressFrom = findViewById(R.id.addressFrom)
+        addressTo = findViewById(R.id.addressTo)
+        members = findViewById(R.id.membersCount)
+        price = findViewById(R.id.price)
         val ride = intent.getSerializableExtra("ride") as Ride?
         if (ride != null){
             addressFrom.text = ride.addressFrom
