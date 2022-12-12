@@ -1,39 +1,36 @@
 package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Button
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.adapter.RideLineAdapter
-import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
+import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.data.Ride
 
 
 class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
-
-    var api: ApiInterface = APIBuilder.apiService
+    // Global vars
+    private lateinit var api: ApiInterface
     lateinit var adapter: RideLineAdapter
     lateinit var rcView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ride_line)
+
+        api = APIBuilder(baseContext).apiService
 
         // View Elements
         val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
@@ -51,7 +48,7 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
         refreshLayout.setOnRefreshListener {
             updateRideList()
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed( {
                 refreshLayout.isRefreshing = false
             }, 500)
         }
@@ -116,8 +113,10 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
     // Ride Item OnClick
     override fun onClickItem(ride: Ride) {
-        val intent = Intent(this@RideLineActivity, RoomActivity::class.java).putExtra("ride", ride)
+        val intent = Intent(
+            this@RideLineActivity, RideActivity::class.java
+        ).putExtra("ride", ride)
+
         startActivity(intent)
     }
-
 }

@@ -11,13 +11,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
         android:text="dev by 1110-room"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/hello"
+        app:layout_constraintStart_toStartOf="@+id/hello"
+        app:layout_constraintTop_toBottomOf="@+id/hello" />
 
     <Button
         android:id="@+id/prifileButton"
@@ -52,7 +52,7 @@
         android:background="@color/black"
         android:text="Fake taxi"
         android:textColor="#FFB300"
-        android:textSize="50sp"
+        android:textSize="54sp"
         android:textStyle="normal|bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -63,7 +63,7 @@
         android:id="@+id/button"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="56dp"
+        android:layout_marginBottom="70dp"
         android:onClick="onClickRideLine"
         android:text="Лента"
         app:layout_constraintBottom_toBottomOf="parent"

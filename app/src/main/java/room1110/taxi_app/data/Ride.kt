@@ -20,28 +20,28 @@ class Ride() : java.io.Serializable {
     var rideSize: Int = 0
 
     @SerializedName("members")
-    lateinit var members: List<User>
+    var members: List<User>? = listOf()
 
     @SerializedName("address_from")
-    lateinit var addressFrom: String
+    var addressFrom: String = ""
 
     @SerializedName("address_to")
-    lateinit var addressTo: String
+    var addressTo: String = ""
 
     @SerializedName("status")
-    lateinit var status: String
+    var status: String = ""
 
     @SerializedName("taxi_service")
-    lateinit var taxiService: String
+    var taxiService: String = ""
 
     @SerializedName("dt_from")
-    private lateinit var dtFrom: String
+    private var dtFrom: String = ""
 
     @SerializedName("dt_to")
     private var dtTo: String? = null
 
     fun getMembersCount(): Int {
-        return members.size + 1
+        return if (members == null) 1 else members!!.size + 1
     }
 
     fun getDtFrom(): LocalDateTime? {
@@ -49,37 +49,46 @@ class Ride() : java.io.Serializable {
     }
 
     fun getDtTo(): LocalDateTime? {
-        return LocalDateTime.parse(dtTo)
+        return if (dtTo == null)
+            null
+        else
+            LocalDateTime.parse(dtTo)
     }
 
-//        constructor(
-//        id: Long,
-//        price: Int,
-//        distance: Double,
-//        owner: User,
-//        rideSize: Int,
-//        members: List<User>,
-//        addressFrom: String,
-//        addressTo: String,
-//        status: String,
-//        taxiService: String,
-//        dtFrom: String,
-//        dtTo: String?
-//    ) : this() {
-//        this.id = id
-//        this.price = price
-//        this.distance = distance
-//        this.owner = owner
-//        this.rideSize = rideSize
-//        this.members = members
-//        this.addressFrom = addressFrom
-//        this.addressTo = addressTo
-//        this.status = status
-//        this.taxiService = taxiService
-//        this.dtFrom = dtFrom
-//        this.dtTo = dtTo
-//    }
+    override fun toString(): String {
+        return "Ride(id=$id, price=$price, distance=$distance, owner=$owner, rideSize=$rideSize, members=$members, addressFrom='$addressFrom', addressTo='$addressTo', status='$status', taxiService='$taxiService', dtFrom='$dtFrom', dtTo=$dtTo)"
+    }
+
+    // New Ride Constructor
+    constructor(
+        rideSize: Int,
+        addressFrom: String,
+        addressTo: String,
+        taxiService: String
+    ) : this() {
+        this.rideSize = rideSize
+        this.addressFrom = addressFrom
+        this.addressTo = addressTo
+        this.taxiService = taxiService
+    }
 }
+
+data class RideRequest(
+    @SerializedName("owner")
+    var owner: User,
+
+    @SerializedName("ride_size")
+    var rideSize: Int,
+
+    @SerializedName("address_from")
+    var addressFrom: String,
+
+    @SerializedName("address_to")
+    var addressTo: String,
+
+    @SerializedName("taxi_service")
+    var taxiService: String
+)
 
 //data class RideSerialized(
 //    @SerializedName("id") val id: Long,

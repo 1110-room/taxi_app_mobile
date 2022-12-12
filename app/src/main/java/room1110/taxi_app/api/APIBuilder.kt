@@ -1,7 +1,12 @@
 package room1110.taxi_app.api
 
-object APIBuilder {
-    private const val BASE_URL = "http://192.168.31.248:8080/"
+import android.content.Context
+import room1110.taxi_app.R
+
+class APIBuilder(context: Context) {
+    private val BASE_URL = "http://${context.getString(R.string.API_IP)}:8080/"
     val apiService: ApiInterface
-        get() = RetrofitBuilder.generateConverter(BASE_URL).create(ApiInterface::class.java)
+        get() {
+            return RetrofitBuilder.generateConverter(BASE_URL).create(ApiInterface::class.java)
+        }
 }
