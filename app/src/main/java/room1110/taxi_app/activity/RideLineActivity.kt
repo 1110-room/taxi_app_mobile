@@ -38,7 +38,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
         rcView = findViewById(R.id.rideLineRC)
         rcView.layoutManager = LinearLayoutManager(this)
-        /////////////////
 
         // Listeners
         createRideButton.setOnClickListener {
@@ -52,7 +51,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
                 refreshLayout.isRefreshing = false
             }, 500)
         }
-        /////////////////
     }
 
     override fun onStart() {

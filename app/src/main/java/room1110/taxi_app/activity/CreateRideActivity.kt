@@ -9,13 +9,14 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import androidx.core.widget.doAfterTextChanged
+import retrofit2.*
 import room1110.taxi_app.R
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.data.Ride
+import room1110.taxi_app.data.RideRequest
+import room1110.taxi_app.data.User
 
 class CreateRideActivity : AppCompatActivity() {
     private val taxiServices = arrayListOf("yandex")

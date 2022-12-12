@@ -18,7 +18,7 @@ import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 
 class EditCardNumberActivity : AppCompatActivity() {
-    private val api: ApiInterface = APIBuilder.apiService
+    private lateinit var api: ApiInterface
     var user: User? = null
     lateinit var newCardNumber: EditText
 
@@ -26,10 +26,15 @@ class EditCardNumberActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_cardnumber)
 
+        api = APIBuilder(baseContext).apiService
+
+        // View Elements
         var button = findViewById<Button>(R.id.saveChangesButton)
         button.setBackgroundColor(Color.parseColor("#FFB300"))
         newCardNumber = findViewById(R.id.newCard)
         user = intent.getSerializableExtra("user") as User?
+
+        // Listeners
         button.setOnClickListener {
             if (user != null) {
                 user!!.cardNumber = newCardNumber.text.toString()

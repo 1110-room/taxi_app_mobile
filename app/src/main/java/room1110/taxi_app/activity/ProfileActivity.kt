@@ -2,11 +2,12 @@ package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,10 +15,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import room1110.taxi_app.R
+import room1110.taxi_app.adapter.RideHistoryAdapter
+import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
@@ -117,82 +118,72 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         })
     }
 
-    override fun onClickItem(ride: Ride) {
-        // set RideArchivedActivity
-        val intent = Intent(
-            this@ProfileActivity, RideActivity::class.java
-        ).putExtra("ride", ride)
-
 //    fun changeCardNumberClick(user: User){
 //        val intent = Intent(this, EditCardNumberActivity::class.java).putExtra("user", user)
 //        startActivity(intent)
 //    }
 
 
-        @SuppressLint("NotifyDataSetChanged")
-        private fun getUserById(id: Long) {
-            api.getUserById(id).enqueue(object : Callback<User> {
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    val dialog: AlertDialog = this@ProfileActivity.let {
-                        AlertDialog.Builder(it)
-                            .setMessage(t.message.toString())
-                            .setTitle("Error")
-                            .create()
-                    }
-                    dialog.show()
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getUserById(id: Long) {
+        api.getUserById(id).enqueue(object : Callback<User> {
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                val dialog: AlertDialog = this@ProfileActivity.let {
+                    AlertDialog.Builder(it)
+                        .setMessage(t.message.toString())
+                        .setTitle("Error")
+                        .create()
                 }
+                dialog.show()
 
-                override fun onResponse(
-                    call: Call<User>,
-                    response: Response<User>
-                ) {
-                    user = response.body() as User
+            }
+
+            override fun onResponse(
+                call: Call<User>,
+                response: Response<User>
+            ) {
+                user = response.body() as User
 //                user.id = responseUser.id
 //                user.cardNumber = responseUser.cardNumber
-                    profileText.text = user.name + " " + user.surname
+                profileText.text = user.name + " " + user.surname
 
-                    cardNumber.text = user.cardNumber
+                cardNumber.text = user.cardNumber
 
-                    editAvatarBitmap(avatar, user)
+                editAvatarBitmap(avatar, user)
 //                Log.d("user", user.toString())
-                    changeCardNumberButton.setOnClickListener {
+                changeCardNumberButton.setOnClickListener {
 //                    Log.d("user", user.toString())
-                        val intent = Intent(
-                            this@ProfileActivity,
-                            EditCardNumberActivity::class.java
-                        ).putExtra("user", user)
-                        startActivity(intent)
-                    }
+                    val intent = Intent(
+                        this@ProfileActivity,
+                        EditCardNumberActivity::class.java
+                    ).putExtra("user", user)
+                    startActivity(intent)
+                }
 //                Log.d("user", user.toString())
-                }
-            })
-        }
+            }
+        })
+    }
 
-        private fun editAvatarBitmap(userView: ImageView, user: User?) {
-            if (user != null) {
-                val avatarBytes = user.getAvatar()
-                if (avatarBytes != null) {
-                    userView.setImageBitmap(byteArrayToBitmap(avatarBytes))
-//                owner.setPadding(5)
-//                owner.setBackgroundColor(Color.BLACK)
-                }
+    private fun editAvatarBitmap(userView: ImageView, user: User?) {
+        if (user != null) {
+            val avatarBytes = user.getAvatar()
+            if (avatarBytes != null) {
+                userView.setImageBitmap(byteArrayToBitmap(avatarBytes))
             }
         }
-
-        private fun byteArrayToBitmap(data: ByteArray): Bitmap {
-            return BitmapFactory.decodeByteArray(data, 0, data.size)
-        }
-
-        override fun onClickItem(ride: Ride) {
-            // set RideArchivedActivity
-            val intent = Intent(
-                this@ProfileActivity, RideActivity::class.java
-            ).putExtra("ride", ride)
-
-            startActivity(intent)
-        }
-
-
     }
+
+    private fun byteArrayToBitmap(data: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(data, 0, data.size)
+    }
+
+    override fun onClickItem(ride: Ride) {
+        // set RideArchivedActivity
+        val intent = Intent(
+            this@ProfileActivity, RideActivity::class.java
+        ).putExtra("ride", ride)
+
+        startActivity(intent)
+    }
+}
 
