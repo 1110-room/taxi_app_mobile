@@ -2,11 +2,12 @@ package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,12 +15,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import room1110.taxi_app.R
 import room1110.taxi_app.adapter.RideHistoryAdapter
-import room1110.taxi_app.adapter.RideLineAdapter
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.data.Ride
@@ -38,6 +36,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
     private lateinit var changeCardNumberButton: Button
     private lateinit var avgReview: TextView
     private var user = User()
+
     //    private lateinit var star: ImageView
     //    private var avgReview: Float = 0f
 
@@ -63,14 +62,8 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
         logoutButton.setBackgroundColor(Color.parseColor(color))
         changeCardNumberButton.setBackgroundColor(Color.parseColor(color))
-
-        user.name = "Дамир"
-        user.surname = "Гарифуллин"
-        user.cardNumber = "1234567890123456"
-
-        profileText.text = user.name + " " + user.surname
-
-        cardNumber.text = user.cardNumber
+        user = User()
+        getUserById(2)
 
         avatar.setImageResource(R.drawable.my_avatar)
 
@@ -123,6 +116,65 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
                 rcView.adapter = adapter
             }
         })
+    }
+
+//    fun changeCardNumberClick(user: User){
+//        val intent = Intent(this, EditCardNumberActivity::class.java).putExtra("user", user)
+//        startActivity(intent)
+//    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getUserById(id: Long) {
+        api.getUserById(id).enqueue(object : Callback<User> {
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                val dialog: AlertDialog = this@ProfileActivity.let {
+                    AlertDialog.Builder(it)
+                        .setMessage(t.message.toString())
+                        .setTitle("Error")
+                        .create()
+                }
+                dialog.show()
+
+            }
+
+            override fun onResponse(
+                call: Call<User>,
+                response: Response<User>
+            ) {
+                user = response.body() as User
+//                user.id = responseUser.id
+//                user.cardNumber = responseUser.cardNumber
+                profileText.text = user.name + " " + user.surname
+
+                cardNumber.text = user.cardNumber
+
+                editAvatarBitmap(avatar, user)
+//                Log.d("user", user.toString())
+                changeCardNumberButton.setOnClickListener {
+//                    Log.d("user", user.toString())
+                    val intent = Intent(
+                        this@ProfileActivity,
+                        EditCardNumberActivity::class.java
+                    ).putExtra("user", user)
+                    startActivity(intent)
+                }
+//                Log.d("user", user.toString())
+            }
+        })
+    }
+
+    private fun editAvatarBitmap(userView: ImageView, user: User?) {
+        if (user != null) {
+            val avatarBytes = user.getAvatar()
+            if (avatarBytes != null) {
+                userView.setImageBitmap(byteArrayToBitmap(avatarBytes))
+            }
+        }
+    }
+
+    private fun byteArrayToBitmap(data: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(data, 0, data.size)
     }
 
     override fun onClickItem(ride: Ride) {

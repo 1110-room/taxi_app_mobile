@@ -38,7 +38,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
 
         rcView = findViewById(R.id.rideLineRC)
         rcView.layoutManager = LinearLayoutManager(this)
-        /////////////////
 
         // Listeners
         createRideButton.setOnClickListener {
@@ -52,7 +51,6 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
                 refreshLayout.isRefreshing = false
             }, 500)
         }
-        /////////////////
     }
 
     override fun onStart() {
@@ -114,7 +112,7 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
     // Ride Item OnClick
     override fun onClickItem(ride: Ride) {
         val intent = Intent(
-            this, RideActivity::class.java
+            this@RideLineActivity, RideActivity::class.java
         ).putExtra("ride", ride)
 
         startActivity(intent)

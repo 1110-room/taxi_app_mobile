@@ -1,10 +1,10 @@
 package room1110.taxi_app.api
 
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 import room1110.taxi_app.data.Ride
+import retrofit2.http.*
 import room1110.taxi_app.data.RideRequest
 import room1110.taxi_app.data.User
 
@@ -16,8 +16,7 @@ interface ApiInterface {
     fun getRideList(): Call<MutableList<Ride>>
 
     @GET("users/{id}")
-    @Headers("Accept: application/json")
-    fun fwtUser(): Call<User>
+    fun getUserById(@Path("id") id: Long): Call<User>
 
     @GET("ride/history/{user_id}")
     @Headers("Accept: application/json")
@@ -29,4 +28,8 @@ interface ApiInterface {
     @Headers("Content-type: application/json")
     // do suspend (async)
     fun createRide(@Body newRide: RideRequest): Call<Ride>
+
+    @POST("users/change-card")
+    @Headers("Content-type: application/json")
+    fun changeCard(@Body user: User?): Response<User>
 }

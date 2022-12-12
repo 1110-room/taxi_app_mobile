@@ -2,7 +2,6 @@ package room1110.taxi_app.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -11,10 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 import room1110.taxi_app.R
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.api.APIBuilder
