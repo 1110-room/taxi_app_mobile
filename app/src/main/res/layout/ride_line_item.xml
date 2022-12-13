@@ -100,8 +100,8 @@
 
             <ImageView
                 android:id="@+id/rideMember2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rideMember3"
@@ -109,8 +109,8 @@
 
             <ImageView
                 android:id="@+id/rideMember3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -118,8 +118,8 @@
 
             <ImageView
                 android:id="@+id/rideMember1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/rideMember2"
