@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.RideActivity">
+
+    <TextView
+        android:id="@+id/roomText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/roomText"
+        android:textColor="#FFB300"
+        android:textSize="38sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rideInfoLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roomText">
+
+        <TextView
+            android:id="@+id/statusTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/statusTV"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/membersCountTV"
+            app:layout_constraintTop_toBottomOf="@+id/membersCountTV" />
+
+        <TextView
+            android:id="@+id/rideMembersCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="2/4"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/membersCountTV"
+            app:layout_constraintStart_toEndOf="@+id/membersCountTV"
+            app:layout_constraintTop_toTopOf="@+id/membersCountTV" />
+
+        <TextView
+            android:id="@+id/serviceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/serviceTV"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/statusTV"
+            app:layout_constraintTop_toBottomOf="@+id/statusTV" />
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/price"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/addressToTV"
+            app:layout_constraintTop_toBottomOf="@+id/addressToTV" />
+
+        <TextView
+            android:id="@+id/rideAddressTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Кремлевская 35"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/addressToTV"
+            app:layout_constraintStart_toEndOf="@+id/addressToTV" />
+
+        <TextView
+            android:id="@+id/rideAddressFrom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Деревня Универсиады 5"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/addressFromTV"
+            app:layout_constraintStart_toEndOf="@+id/addressFromTV" />
+
+        <TextView
+            android:id="@+id/addressFromTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:text="@string/from"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addressToTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/to"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/addressFromTV"
+            app:layout_constraintTop_toBottomOf="@+id/addressFromTV" />
+
+        <TextView
+            android:id="@+id/rideStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:text="OPEN"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/statusTV"
+            app:layout_constraintStart_toEndOf="@+id/statusTV" />
+
+        <TextView
+            android:id="@+id/rideService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="YANDEX"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/serviceTV"
+            app:layout_constraintStart_toEndOf="@+id/serviceTV" />
+
+        <TextView
+            android:id="@+id/membersCountTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/membersCountTV"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/priceTV"
+            app:layout_constraintTop_toBottomOf="@+id/priceTV" />
+
+        <TextView
+            android:id="@+id/ridePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="355 Р"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/priceTV"
+            app:layout_constraintStart_toEndOf="@+id/priceTV"
+            app:layout_constraintTop_toTopOf="@+id/priceTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/membersLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom|fill_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rideInfoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/rideInfoLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ownerLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/crown"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="-3dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/rideOwner"
+                app:layout_constraintEnd_toEndOf="@+id/rideOwner"
+                app:layout_constraintStart_toStartOf="@+id/rideOwner"
+                app:srcCompat="@drawable/corona" />
+
+            <ImageView
+                android:id="@+id/rideOwner"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/rideOwnerName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/rideOwnerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Максим"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rideOwner"
+                app:layout_constraintStart_toStartOf="@+id/rideOwner" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/rideMember1"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/rideMemberName1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/rideMemberName1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Андрей"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rideMember1"
+                app:layout_constraintStart_toStartOf="@+id/rideMember1" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/rideMember2"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/rideMemberName2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/rideMemberName2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Алексей"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rideMember2"
+                app:layout_constraintStart_toStartOf="@+id/rideMember2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/rideMember3"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/rideMemberName3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/rideMemberName3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Евгений"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rideMember3"
+                app:layout_constraintStart_toStartOf="@+id/rideMember3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/rideActiveButton"
+        android:layout_width="202dp"
+        android:layout_height="64dp"
+        android:text="Присоединиться"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/membersLayout"
+        app:layout_constraintStart_toStartOf="@+id/membersLayout"
+        app:layout_constraintTop_toBottomOf="@+id/membersLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

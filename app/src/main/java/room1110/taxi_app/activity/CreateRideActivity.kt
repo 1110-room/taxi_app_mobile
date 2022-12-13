@@ -42,8 +42,8 @@ class CreateRideActivity : AppCompatActivity() {
         addressFrom = findViewById(R.id.addressFromEditText)
         addressTo = findViewById(R.id.addressToEditText)
 
-        buttonService1 = findViewById(R.id.service1)
-        buttonService2 = findViewById(R.id.service2)
+        buttonService1 = findViewById(R.id.creationService1)
+        buttonService2 = findViewById(R.id.creationService2)
 
         curSize = findViewById(R.id.curSizeText)
         finalCreateButton = findViewById(R.id.finalCreateButton)

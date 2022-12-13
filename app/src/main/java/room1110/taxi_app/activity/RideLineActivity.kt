@@ -33,8 +33,8 @@ class RideLineActivity : AppCompatActivity(), RideLineAdapter.ItemListener {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
-        val createRideButton: Button = findViewById(R.id.createRide)
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.rideLineRefreshLayout)
+        val createRideButton: Button = findViewById(R.id.createRideButton)
 
         rcView = findViewById(R.id.rideLineRC)
         rcView.layoutManager = LinearLayoutManager(this)

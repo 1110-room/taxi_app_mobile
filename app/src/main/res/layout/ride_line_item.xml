@@ -32,7 +32,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/ridePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
@@ -42,12 +42,12 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/status"
+                app:layout_constraintStart_toStartOf="@+id/rideStatus"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/rideStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
@@ -61,7 +61,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/membersCount"
+                android:id="@+id/rideMembersCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3/4"
@@ -80,35 +80,35 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/crown"
                 android:layout_width="20dp"
                 android:layout_height="18dp"
                 android:layout_marginBottom="-3dp"
-                app:layout_constraintBottom_toTopOf="@+id/owner"
-                app:layout_constraintEnd_toEndOf="@+id/owner"
-                app:layout_constraintStart_toStartOf="@+id/owner"
+                app:layout_constraintBottom_toTopOf="@+id/rideOwner"
+                app:layout_constraintEnd_toEndOf="@+id/rideOwner"
+                app:layout_constraintStart_toStartOf="@+id/rideOwner"
                 app:srcCompat="@drawable/corona" />
 
             <ImageView
-                android:id="@+id/owner"
+                android:id="@+id/rideOwner"
                 android:layout_width="43dp"
                 android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/member1"
+                app:layout_constraintEnd_toStartOf="@+id/rideMember1"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/member2"
+                android:id="@+id/rideMember2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/member3"
+                app:layout_constraintEnd_toStartOf="@+id/rideMember3"
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/member3"
+                android:id="@+id/rideMember3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:visibility="visible"
@@ -117,16 +117,16 @@
                 tools:src="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/member1"
+                android:id="@+id/rideMember1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/member2"
+                app:layout_constraintEnd_toStartOf="@+id/rideMember2"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/addressFrom"
+                android:id="@+id/rideAddressFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
@@ -136,7 +136,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addressTo"
+                android:id="@+id/rideAddressTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"

@@ -13,11 +13,11 @@ class User() : java.io.Serializable {
     var ready: Boolean = false
     private var avatar: String? = null
     @SerializedName("rides")
-    lateinit var rides: List<Ride>
+    var rides: List<Ride> = listOf()
     @SerializedName("receivedReviews")
-    lateinit var receivedReviews: List<String>
+    var receivedReviews: List<String> = listOf()
     @SerializedName("leavedReviews")
-    lateinit var leavedReviews: List<String>
+    var leavedReviews: List<String> = listOf()
     constructor(id: Long) : this() {
         this.id = id
     }

@@ -7,7 +7,7 @@
     tools:context=".activity.RideLineActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/rideLineRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -36,11 +36,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/refreshLayout"
+        app:layout_constraintTop_toBottomOf="@+id/rideLineRefreshLayout"
         app:layout_constraintVertical_bias="0.5">
 
         <Button
-            android:id="@+id/createRide"
+            android:id="@+id/createRideButton"
             android:layout_width="124dp"
             android:layout_height="61dp"
             android:layout_marginTop="25dp"
