@@ -20,17 +20,17 @@
         app:layout_constraintTop_toBottomOf="@+id/hello" />
 
     <Button
-        android:id="@+id/prifileButton"
+        android:id="@+id/profileButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:onClick="onClickProfile"
         android:text="Profile"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/rideLineButton"
+        app:layout_constraintEnd_toEndOf="@+id/rideLineButton"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/button" />
+        app:layout_constraintStart_toStartOf="@+id/rideLineButton" />
 
     <Button
         android:id="@+id/authButton"
@@ -39,10 +39,10 @@
         android:layout_marginBottom="40dp"
         android:text="Войти через Vk"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/prifileButton"
-        app:layout_constraintEnd_toEndOf="@+id/prifileButton"
+        app:layout_constraintBottom_toTopOf="@+id/profileButton"
+        app:layout_constraintEnd_toEndOf="@+id/profileButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/prifileButton" />
+        app:layout_constraintStart_toStartOf="@+id/profileButton" />
 
     <TextView
         android:id="@+id/hello"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/rideLineButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="70dp"

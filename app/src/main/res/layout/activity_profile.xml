@@ -7,7 +7,7 @@
     tools:context=".activity.ProfileActivity">
 
     <TextView
-        android:id="@+id/profileInfo"
+        android:id="@+id/profileName"
         android:layout_width="144dp"
         android:layout_height="27dp"
         android:layout_marginStart="16dp"
@@ -15,12 +15,12 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/avatar"
+        app:layout_constraintStart_toEndOf="@+id/profileAvatar"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/full_names" />
 
     <ImageView
-        android:id="@+id/avatar"
+        android:id="@+id/profileAvatar"
         android:layout_width="62dp"
         android:layout_height="63dp"
         android:layout_marginStart="16dp"
@@ -35,12 +35,12 @@
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="11dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/avatar"
-        app:layout_constraintTop_toBottomOf="@+id/profileInfo" />
+        android:text="1234 5678 1234 5678"
+        app:layout_constraintStart_toEndOf="@+id/profileAvatar"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <Button
-        android:id="@+id/changeCardNumber"
+        android:id="@+id/changeCardNumberButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
@@ -71,11 +71,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/rideHistoryTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="188dp"
-        android:text="История поездок"
+        android:text="@string/rideHistoryText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -88,14 +88,14 @@
         android:layout_height="2dp"
         android:layout_marginTop="15dp"
         android:background="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/rideHistoryTV" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
+        android:id="@+id/historyRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/changeCardNumber"
+        app:layout_constraintBottom_toTopOf="@+id/changeCardNumberButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/delimiter2">

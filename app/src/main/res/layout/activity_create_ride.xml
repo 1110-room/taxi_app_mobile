@@ -148,7 +148,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/service1"
+            android:id="@+id/creationService1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -158,12 +158,12 @@
             android:text="ToggleButton"
             android:textOff="Yandex"
             android:textOn="Yandex"
-            app:layout_constraintEnd_toStartOf="@+id/service2"
+            app:layout_constraintEnd_toStartOf="@+id/creationService2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/serviceTV" />
 
         <ToggleButton
-            android:id="@+id/service2"
+            android:id="@+id/creationService2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"

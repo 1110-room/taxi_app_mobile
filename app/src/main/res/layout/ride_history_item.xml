@@ -47,7 +47,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/ridePrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="130 R"
@@ -56,13 +56,13 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/membersCount"
+                app:layout_constraintEnd_toStartOf="@+id/rideMembersCount"
                 app:layout_constraintStart_toEndOf="@+id/dtTo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/membersCount"
+                android:id="@+id/rideMembersCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3/4"
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/addressFrom"
+                android:id="@+id/rideAddressFrom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -92,17 +92,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/addressTo"
+                android:id="@+id/rideAddressTo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="ул. Деревня Универсиады 5"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/addressFrom"
-                app:layout_constraintTop_toBottomOf="@+id/addressFrom" />
+                app:layout_constraintStart_toStartOf="@+id/rideAddressFrom"
+                app:layout_constraintTop_toBottomOf="@+id/rideAddressFrom" />
 
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/rideDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
@@ -113,14 +113,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/rideStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Завершена"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/date"
-                app:layout_constraintTop_toBottomOf="@+id/date" />
+                app:layout_constraintEnd_toEndOf="@+id/rideDate"
+                app:layout_constraintTop_toBottomOf="@+id/rideDate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

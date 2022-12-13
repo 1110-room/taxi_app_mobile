@@ -23,6 +23,7 @@
     <string name="membersCountTV">Участников:</string>
     <string name="statusTV">Статус:</string>
     <string name="serviceTV">Сервис:</string>
+    <string name="rideHistoryText">История поездок</string>
 
 
 </resources>

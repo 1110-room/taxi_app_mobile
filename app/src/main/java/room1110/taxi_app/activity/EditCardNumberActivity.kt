@@ -4,17 +4,11 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
-import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 
 class EditCardNumberActivity : AppCompatActivity() {
@@ -29,9 +23,9 @@ class EditCardNumberActivity : AppCompatActivity() {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        var button = findViewById<Button>(R.id.saveChangesButton)
+        var button = findViewById<Button>(R.id.saveCardButton)
         button.setBackgroundColor(Color.parseColor("#FFB300"))
-        newCardNumber = findViewById(R.id.newCard)
+        newCardNumber = findViewById(R.id.newCardEditText)
         user = intent.getSerializableExtra("user") as User?
 
         // Listeners

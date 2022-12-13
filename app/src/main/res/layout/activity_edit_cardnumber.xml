@@ -8,7 +8,7 @@
     tools:context=".activity.EditCardNumberActivity">
 
     <EditText
-        android:id="@+id/newCard"
+        android:id="@+id/newCardEditText"
         android:layout_width="195dp"
         android:layout_height="46dp"
         android:layout_gravity="center"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/saveChangesButton"
+        android:id="@+id/saveCardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="49dp"
