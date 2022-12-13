@@ -47,16 +47,16 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.refreshLayout)
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.rideLineRefreshLayout)
 
         rcView = findViewById(R.id.historyRC)
         rcView.layoutManager = LinearLayoutManager(this)
 
-        profileText = findViewById(R.id.profileInfo)
+        profileText = findViewById(R.id.profileName)
         cardNumber = findViewById(R.id.cardNumber)
-        avatar = findViewById(R.id.avatar)
+        avatar = findViewById(R.id.profileAvatar)
         logoutButton = findViewById(R.id.logoutButton)
-        changeCardNumberButton = findViewById(R.id.changeCardNumber)
+        changeCardNumberButton = findViewById(R.id.changeCardNumberButton)
 
 
         logoutButton.setBackgroundColor(Color.parseColor(color))

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -30,12 +29,10 @@ class EditCardNumberActivity : AppCompatActivity() {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        var button = findViewById<Button>(R.id.saveChangesButton)
+        var button = findViewById<Button>(R.id.saveCardButton)
         button.setBackgroundColor(Color.parseColor("#FFB300"))
-        newCardNumber = findViewById(R.id.newCard)
+        newCardNumber = findViewById(R.id.newCardEditText)
         user = intent.getSerializableExtra("user") as User?
-
-        Log.d("UserCard", user!!.cardNumber.toString())
 
         // Listeners
         button.setOnClickListener {

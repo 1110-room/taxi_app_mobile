@@ -16,13 +16,13 @@ class RideHistoryAdapter(private val rideList: List<Ride>, var listener: ItemLis
         RecyclerView.ViewHolder(itemView) {
         private val dtFrom: TextView = itemView.findViewById(R.id.dtFrom)
         private val dtTo: TextView = itemView.findViewById(R.id.dtTo)
-        private val price: TextView = itemView.findViewById(R.id.price)
-        private val membersCount: TextView = itemView.findViewById(R.id.membersCount)
-        private val status: TextView = itemView.findViewById(R.id.status)
-        private val date: TextView = itemView.findViewById(R.id.date)
+        private val price: TextView = itemView.findViewById(R.id.ridePrice)
+        private val membersCount: TextView = itemView.findViewById(R.id.rideMembersCount)
+        private val status: TextView = itemView.findViewById(R.id.rideStatus)
+        private val date: TextView = itemView.findViewById(R.id.rideDate)
 
-        private val addressFrom: TextView = itemView.findViewById(R.id.addressFrom)
-        private val addressTo: TextView = itemView.findViewById(R.id.addressTo)
+        private val addressFrom: TextView = itemView.findViewById(R.id.rideAddressFrom)
+        private val addressTo: TextView = itemView.findViewById(R.id.rideAddressTo)
 
         @SuppressLint("SetTextI18n")
         fun bind(ride: Ride, listener: ItemListener) {
