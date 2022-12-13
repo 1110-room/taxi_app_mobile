@@ -56,7 +56,6 @@ class RideActivity : AppCompatActivity() {
         memberName3 = findViewById(R.id.rideMemberName3)
         membersNames = arrayListOf(memberName1, memberName2, memberName3)
 
-        ownerName.visibility = View.INVISIBLE
         for (name in membersNames) {
             name.visibility = View.INVISIBLE
         }
@@ -72,13 +71,12 @@ class RideActivity : AppCompatActivity() {
             price.text = "${ride.price} ₽"
             size.text = "${ride.getMembersCount()}/${ride.rideSize}"
             status.text = ride.status
-            service.text = ride.taxiService
+            service.text = ride.taxiService.uppercase()
 
 
             ride.owner?.let {
                 editAvatarBitmap(owner, it)
                 ownerName.text = it.name
-                ownerName.visibility = View.VISIBLE
             }
 
             for ((i, member) in members.withIndex()) {
@@ -86,6 +84,8 @@ class RideActivity : AppCompatActivity() {
                     membersNames[i].text = it.name
                     membersNames[i].visibility = View.VISIBLE
                     editAvatarBitmap(member, it)
+                } ?: run {
+                    members[i].visibility = View.GONE
                 }
             }
         }

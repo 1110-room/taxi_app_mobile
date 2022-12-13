@@ -1,8 +1,7 @@
 package room1110.taxi_app.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import room1110.taxi_app.R
 import room1110.taxi_app.data.Ride
-import room1110.taxi_app.data.User
 import room1110.taxi_app.util.AvatarConvert.editAvatarBitmap
 import java.time.format.DateTimeFormatter
 
@@ -48,8 +46,15 @@ class RideLineAdapter(private val rideList: List<Ride>, var listener: ItemListen
 
             ride.owner?.let { editAvatarBitmap(owner, it) }
 
-            for ((i, member) in members.withIndex()) {
-                ride.members?.getOrNull(i)?.let { editAvatarBitmap(member, it) }
+            for (i in 0 until ride.rideSize - 1) {
+                ride.members?.getOrNull(i)?.let {
+                    editAvatarBitmap(members[i], it)
+                    members[i].visibility = View.VISIBLE
+                }
+            }
+
+            for (i in ride.rideSize - 1 until members.size) {
+                members[i].visibility = View.INVISIBLE
             }
 
             // доделать динамическое кол-во members
