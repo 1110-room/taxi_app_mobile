@@ -29,7 +29,7 @@ interface ApiInterface {
     // do suspend (async)
     fun createRide(@Body newRide: RideRequest): Call<Ride>
 
-    @POST("users/change-card")
+    @PUT("users/change-card")
     @Headers("Content-type: application/json")
-    fun changeCard(@Body user: User?): Response<User>
+    fun changeCard(@Body user: User): Call<User>
 }

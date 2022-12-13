@@ -8,6 +8,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -37,8 +38,6 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
     private lateinit var avgReview: TextView
     private var user = User()
 
-    //    private lateinit var star: ImageView
-    //    private var avgReview: Float = 0f
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +62,12 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         logoutButton.setBackgroundColor(Color.parseColor(color))
         changeCardNumberButton.setBackgroundColor(Color.parseColor(color))
         user = User()
-        getUserById(2)
-
-        avatar.setImageResource(R.drawable.my_avatar)
+        getUserById(1)
 
         // Listeners
         refreshLayout.setOnRefreshListener {
             updateRideHistory()
+            getUserById(1)
             Handler().postDelayed({
                 refreshLayout.isRefreshing = false
             }, 500)
@@ -86,6 +84,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
         updateRideHistory()
     }
+
 
     // API Requests
     private fun updateRideHistory() {
@@ -118,12 +117,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         })
     }
 
-//    fun changeCardNumberClick(user: User){
-//        val intent = Intent(this, EditCardNumberActivity::class.java).putExtra("user", user)
-//        startActivity(intent)
-//    }
-
-
+    // Getting user from db
     @SuppressLint("NotifyDataSetChanged")
     private fun getUserById(id: Long) {
         api.getUserById(id).enqueue(object : Callback<User> {
@@ -135,7 +129,6 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
                         .create()
                 }
                 dialog.show()
-
             }
 
             override fun onResponse(
@@ -143,23 +136,16 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
                 response: Response<User>
             ) {
                 user = response.body() as User
-//                user.id = responseUser.id
-//                user.cardNumber = responseUser.cardNumber
                 profileText.text = user.name + " " + user.surname
-
                 cardNumber.text = user.cardNumber
-
                 editAvatarBitmap(avatar, user)
-//                Log.d("user", user.toString())
                 changeCardNumberButton.setOnClickListener {
-//                    Log.d("user", user.toString())
                     val intent = Intent(
                         this@ProfileActivity,
                         EditCardNumberActivity::class.java
                     ).putExtra("user", user)
                     startActivity(intent)
                 }
-//                Log.d("user", user.toString())
             }
         })
     }

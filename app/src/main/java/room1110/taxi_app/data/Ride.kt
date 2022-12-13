@@ -73,7 +73,7 @@ class Ride() : java.io.Serializable {
     }
 }
 
-data class RideRequest(
+data class  RideRequest(
     @SerializedName("owner")
     var owner: User,
 
