@@ -47,7 +47,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.rideLineRefreshLayout)
+        val refreshLayout: SwipeRefreshLayout = findViewById(R.id.historyRefreshLayout)
 
         rcView = findViewById(R.id.historyRC)
         rcView.layoutManager = LinearLayoutManager(this)
@@ -61,13 +61,11 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
         logoutButton.setBackgroundColor(Color.parseColor(color))
         changeCardNumberButton.setBackgroundColor(Color.parseColor(color))
-        user = User()
-        getUserById(1)
 
         // Listeners
         refreshLayout.setOnRefreshListener {
             updateRideHistory()
-            getUserById(1)
+            getUserById(2)
             Handler().postDelayed({
                 refreshLayout.isRefreshing = false
             }, 500)
@@ -78,6 +76,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         super.onStart()
         // TODO
         // из всех отзывов оставленных этому юзеру считаем средний
+        getUserById(2)
         avgReview = findViewById(R.id.avgReview)
         val review = 1.5f
         avgReview.text = "Средняя оценка: $review"
@@ -145,6 +144,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
                         EditCardNumberActivity::class.java
                     ).putExtra("user", user)
                     startActivity(intent)
+                    this@ProfileActivity.finish()
                 }
             }
         })

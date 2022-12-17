@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -36,12 +37,13 @@ class EditCardNumberActivity : AppCompatActivity() {
 
         // Listeners
         button.setOnClickListener {
+            Log.d("debug", newCardNumber.text.toString())
             if (user != null && user!!.cardNumber != null) {
                 user!!.cardNumber = newCardNumber.text.toString()
                 changeCardRequest(user!!)
                 val intent = Intent(this@EditCardNumberActivity, ProfileActivity::class.java)
                 startActivity(intent)
-                this.finish()
+                this@EditCardNumberActivity.finish()
             }
         }
     }
