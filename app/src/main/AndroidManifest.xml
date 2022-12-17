@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name=".activity.EditCardNumberActivity"
-            android:exported="false">
+            android:exported="false"
+            android:noHistory="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -47,7 +48,9 @@
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="false">
+
             <meta-data
+                android:noHistory="true"
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
