@@ -5,7 +5,6 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -15,7 +14,6 @@ import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
-import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 
 class EditCardNumberActivity : AppCompatActivity() {
@@ -30,14 +28,13 @@ class EditCardNumberActivity : AppCompatActivity() {
         api = APIBuilder(baseContext).apiService
 
         // View Elements
-        var button = findViewById<Button>(R.id.saveCardButton)
+        val button = findViewById<Button>(R.id.saveCardButton)
         button.setBackgroundColor(Color.parseColor("#FFB300"))
         newCardNumber = findViewById(R.id.newCardEditText)
         user = intent.getSerializableExtra("user") as User?
 
         // Listeners
         button.setOnClickListener {
-            Log.d("debug", newCardNumber.text.toString())
             if (user != null) {
                 user!!.cardNumber = newCardNumber.text.toString()
                 changeCardRequest(user!!)
@@ -47,6 +44,7 @@ class EditCardNumberActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun changeCardRequest(user: User) {
         api.changeCard(user).enqueue(object : Callback<User> {
             override fun onFailure(call: Call<User>, t: Throwable) {

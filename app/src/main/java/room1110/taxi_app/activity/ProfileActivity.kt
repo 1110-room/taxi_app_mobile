@@ -40,7 +40,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
     private lateinit var logoutButton: Button
     private lateinit var changeCardNumberButton: Button
     private lateinit var avgReview: TextView
-    private var user = User()
+    private lateinit var user: User
 
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
