@@ -201,8 +201,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/rideOwnerName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.521"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rideOwnerName"
@@ -228,8 +227,7 @@
                 android:layout_weight="1"
                 app:layout_constraintBottom_toTopOf="@+id/rideMemberName1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rideMemberName1"
@@ -256,8 +254,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/rideMemberName2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rideMemberName2"
@@ -285,8 +282,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/rideMemberName3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/rideMemberName3"

@@ -1,6 +1,7 @@
 package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,6 +13,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +40,9 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
     private lateinit var logoutButton: Button
     private lateinit var changeCardNumberButton: Button
     private lateinit var avgReview: TextView
-    private var user = User()
+    private lateinit var user: User
+
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
 
     @SuppressLint("MissingInflatedId", "SetTextI18n")
@@ -58,25 +64,44 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         logoutButton = findViewById(R.id.logoutButton)
         changeCardNumberButton = findViewById(R.id.changeCardNumberButton)
 
-
         logoutButton.setBackgroundColor(Color.parseColor(color))
         changeCardNumberButton.setBackgroundColor(Color.parseColor(color))
 
         // Listeners
         refreshLayout.setOnRefreshListener {
             updateRideHistory()
-            getUserById(2)
             Handler().postDelayed({
                 refreshLayout.isRefreshing = false
             }, 500)
         }
+
+        startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val data = result.data
+                    val newCardNumber = data?.getStringExtra("newCardNumber")
+
+                    newCardNumber?.let {
+                        cardNumber.text = newCardNumber
+                        cardNumber.invalidate()
+                    } ?: run {
+                        val dialog: AlertDialog = this@ProfileActivity.let {
+                            AlertDialog.Builder(it)
+                                .setMessage("Error updating card number! Refresh the page.")
+                                .setTitle("Error")
+                                .create()
+                        }
+                        dialog.show()
+                    }
+
+                }
+            }
     }
 
     override fun onStart() {
         super.onStart()
-        // TODO
         // из всех отзывов оставленных этому юзеру считаем средний
-        getUserById(2)
+        getUserById(1)
         avgReview = findViewById(R.id.avgReview)
         val review = 1.5f
         avgReview.text = "Средняя оценка: $review"
@@ -138,13 +163,14 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
                 profileText.text = user.name + " " + user.surname
                 cardNumber.text = user.cardNumber
                 editAvatarBitmap(avatar, user)
+
                 changeCardNumberButton.setOnClickListener {
-                    val intent = Intent(
-                        this@ProfileActivity,
-                        EditCardNumberActivity::class.java
-                    ).putExtra("user", user)
-                    startActivity(intent)
-                    this@ProfileActivity.finish()
+                    startForResult.launch(
+                        Intent(
+                            this@ProfileActivity,
+                            EditCardNumberActivity::class.java
+                        ).putExtra("user", user)
+                    )
                 }
             }
         })
