@@ -38,12 +38,12 @@ class EditCardNumberActivity : AppCompatActivity() {
         // Listeners
         button.setOnClickListener {
             Log.d("debug", newCardNumber.text.toString())
-            if (user != null && user!!.cardNumber != null) {
+            if (user != null) {
                 user!!.cardNumber = newCardNumber.text.toString()
                 changeCardRequest(user!!)
-                val intent = Intent(this@EditCardNumberActivity, ProfileActivity::class.java)
-                startActivity(intent)
-                this@EditCardNumberActivity.finish()
+                val intent = Intent().putExtra("newCardNumber", user!!.cardNumber)
+                setResult(RESULT_OK, intent)
+                finish()
             }
         }
     }

@@ -95,8 +95,7 @@
                 android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/rideMember1"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintEnd_toStartOf="@+id/rideMember1" />
 
             <ImageView
                 android:id="@+id/rideMember2"
@@ -104,8 +103,7 @@
                 android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/rideMember3"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintEnd_toStartOf="@+id/rideMember3" />
 
             <ImageView
                 android:id="@+id/rideMember3"
@@ -113,8 +111,7 @@
                 android:layout_height="43dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/rideMember1"
@@ -122,8 +119,7 @@
                 android:layout_height="43dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/rideMember2"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintEnd_toStartOf="@+id/rideMember2" />
 
             <TextView
                 android:id="@+id/rideAddressFrom"
