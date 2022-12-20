@@ -141,7 +141,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
         })
     }
 
-    // Getting user from db
+    // API Requests
     @SuppressLint("NotifyDataSetChanged")
     private fun getUserById(id: Long) {
         api.getUserById(id).enqueue(object : Callback<User> {

@@ -15,8 +15,11 @@ interface ApiInterface {
     @Headers("Accept: application/json")
     fun getRideList(): Call<MutableList<Ride>>
 
-    @GET("users/{id}")
-    fun getUserById(@Path("id") id: Long): Call<User>
+    @GET("users")
+    fun getUserById(@Query("id") id: Long): Call<User>
+
+    @GET("users/vk")
+    fun getUserByVkId(@Query("id") vkId: Long): Call<User>
 
     @GET("ride/history/{user_id}")
     @Headers("Accept: application/json")
