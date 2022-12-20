@@ -35,12 +35,9 @@ class EditCardNumberActivity : AppCompatActivity() {
 
         // Listeners
         button.setOnClickListener {
-            if (user != null) {
+            user?.let {
                 user!!.cardNumber = newCardNumber.text.toString()
                 changeCardRequest(user!!)
-                val intent = Intent().putExtra("newCardNumber", user!!.cardNumber)
-                setResult(RESULT_OK, intent)
-                finish()
             }
         }
     }
@@ -60,7 +57,11 @@ class EditCardNumberActivity : AppCompatActivity() {
             override fun onResponse(
                 call: Call<User>,
                 response: Response<User>
-            ) {}
+            ) {
+                val intent = Intent().putExtra("newCardNumber", user.cardNumber)
+                setResult(RESULT_OK, intent)
+                finish()
+            }
         })
     }
 }
