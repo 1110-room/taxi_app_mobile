@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
-import retrofit2.awaitResponse
 import room1110.taxi_app.R
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
@@ -24,6 +25,7 @@ import kotlin.coroutines.suspendCoroutine
 class RideActivity : AppCompatActivity() {
     private lateinit var api: ApiInterface
     private lateinit var user: User
+    private var ride: Ride? = null
 
     private lateinit var activeButton: Button
 
@@ -78,47 +80,85 @@ class RideActivity : AppCompatActivity() {
         for (name in membersNames) {
             name.visibility = View.INVISIBLE
         }
+
+        // Listeners
+        activeButton.setOnClickListener {
+            when (user.rideStatus) {
+                0 -> {
+                    user.rideStatus = 1
+                    ride?.members?.let {
+                        it.add(user)
+                    } ?: run {
+                        ride?.members = arrayListOf(user)
+                    }
+                    // update user & ride request (web-socket)
+                }
+                1 -> {
+                    if (ride?.getMembersCount() == ride?.rideSize) {
+                        user.ready = !user.ready
+                        // update user request (web-socket)
+                    }
+                }
+            }
+
+            invalidate()
+        }
     }
 
     override fun onStart() {
         super.onStart()
 
         getUser(1)
+        ride = intent.getSerializableExtra("ride") as Ride?
 
-        val ride = intent.getSerializableExtra("ride") as Ride?
-        if (ride != null) {
-            when (user.rideStatus) {
-                0 -> activeButton.text = "Присоединиться"
-                1 -> {
-                    val readyText = if (user.ready) "Не готов" else "Готов"
-                    if (ride.getMembersCount() == ride.rideSize)
-                        activeButton.text = readyText
-                    else
-                        activeButton.text = "Ожидание"
-                }
+        invalidate()
+    }
+
+    private fun invalidate() {
+        ride?.let { ride ->
+            invalidateActiveButton(ride)
+            invalidateText(ride)
+            invalidateMembers(ride)
+        }
+    }
+
+    private fun invalidateActiveButton(ride: Ride) {
+        when (user.rideStatus) {
+            0 -> activeButton.text = "Присоединиться"
+            1 -> {
+                val readyText = if (user.ready) "Не готов" else "Готов"
+                if (ride.getMembersCount() == ride.rideSize)
+                    activeButton.text = readyText
+                else
+                    activeButton.text = "Ожидание"
             }
+        }
+    }
 
-            addressFrom.text = ride.addressFrom
-            addressTo.text = ride.addressTo
-            price.text = "${ride.price} ₽"
-            size.text = "${ride.getMembersCount()}/${ride.rideSize}"
-            status.text = ride.status
-            service.text = ride.taxiService.uppercase()
+    private fun invalidateText(ride: Ride) {
+        addressFrom.text = ride.addressFrom
+        addressTo.text = ride.addressTo
+        price.text = "${ride.price} ₽"
+        size.text = "${ride.getMembersCount()}/${ride.rideSize}"
+        status.text = ride.status
+        service.text = ride.taxiService.uppercase()
+    }
 
+    private fun invalidateMembers(ride: Ride) {
+        ride.owner?.let {
+            editAvatarBitmap(owner, it)
+            ownerName.text = it.name
+        }
 
-            ride.owner?.let {
-                editAvatarBitmap(owner, it)
-                ownerName.text = it.name
-            }
-
-            for ((i, member) in members.withIndex()) {
-                ride.members?.getOrNull(i)?.let {
-                    membersNames[i].text = it.name
-                    membersNames[i].visibility = View.VISIBLE
-                    editAvatarBitmap(member, it)
-                } ?: run {
-                    members[i].visibility = View.GONE
-                }
+        for ((i, member) in members.withIndex()) {
+            ride.members?.getOrNull(i)?.let {
+                membersNames[i].text = it.name
+                membersNames[i].visibility = View.VISIBLE
+                member.visibility = View.VISIBLE
+                editAvatarBitmap(member, it)
+            } ?: run {
+                members[i].visibility = View.GONE
+                member.visibility = View.GONE
             }
         }
     }

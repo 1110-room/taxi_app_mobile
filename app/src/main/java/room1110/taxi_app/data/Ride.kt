@@ -20,7 +20,7 @@ class Ride() : java.io.Serializable {
     var rideSize: Int = 0
 
     @SerializedName("members")
-    var members: List<User>? = listOf()
+    var members: ArrayList<User>? = arrayListOf()
 
     @SerializedName("address_from")
     var addressFrom: String = ""
@@ -90,58 +90,6 @@ data class  RideRequest(
     var taxiService: String
 )
 
-//data class RideSerialized(
-//    @SerializedName("id") val id: Long,
-//    @SerializedName("price") var price: Int,
-//    @SerializedName("distance") var distance: Double,
-//    @SerializedName("owner") var owner: UserSerialized,
-//    @SerializedName("ride_size") var rideSize: Int,
-//    @SerializedName("members") var members: List<UserSerialized>,
-//    @SerializedName("address_from") var addressFrom: String,
-//    @SerializedName("address_to") var addressTo: String,
-//    @SerializedName("status") var status: String,
-//    @SerializedName("taxi_service") var taxiService: String,
-//    @SerializedName("dt_from") var dtFrom: String,
-//    @SerializedName("dt_to") var dtTo: String?
-//)
-
-//class RideSerializer {
-//    companion object {
-//        fun serialize(ride: Ride): RideSerialized {
-//            return RideSerialized(
-//                ride.id,
-//                ride.price,
-//                ride.distance,
-//                UserSerializer.serialize(ride.owner),
-//                ride.rideSize,
-//                UserSerializer.serialize(ride.members),
-//                ride.addressFrom,
-//                ride.addressTo,
-//                ride.status,
-//                ride.taxiService,
-//                ride.dtFrom.toString(),
-//                ride.dtTo.toString()
-//            )
-//        }
-//
-//        fun deserialize(ride: RideSerialized): Ride {
-//            return Ride(
-//                ride.id,
-//                ride.price,
-//                ride.distance,
-//                UserSerializer.deserialize(ride.owner),
-//                ride.rideSize,
-//                UserSerializer.deserialize(ride.members),
-//                ride.addressFrom,
-//                ride.addressTo,
-//                ride.status,
-//                ride.taxiService,
-//                LocalDateTime.parse(ride.dtFrom),
-//                if (ride.dtTo != null) LocalDateTime.parse(ride.dtTo) else null
-//            )
-//        }
-//    }
-//}
 
 /*
 {
