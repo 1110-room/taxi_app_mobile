@@ -14,7 +14,7 @@ class Ride() : java.io.Serializable {
     var distance: Double = 0.0
 
     @SerializedName("owner")
-    var owner: User? = null
+    var owner = User()
 
     @SerializedName("ride_size")
     var rideSize: Int = 0

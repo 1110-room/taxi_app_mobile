@@ -2,6 +2,9 @@ package room1110.taxi_app.data
 
 import android.util.Base64
 import com.google.gson.annotations.SerializedName
+import java.math.RoundingMode
+import java.util.*
+import kotlin.math.roundToInt
 
 class User() : java.io.Serializable {
     var id: Long = 0
@@ -27,10 +30,10 @@ class User() : java.io.Serializable {
     var rides: List<Ride> = listOf()
 
     @SerializedName("received_reviews")
-    var receivedReviews: List<String> = listOf()
+    var receivedReviews: List<Review> = listOf()
 
     @SerializedName("leaved_reviews")
-    var leavedReviews: List<String> = listOf()
+    var leavedReviews: List<Review> = listOf()
 
     constructor(id: Long) : this() {
         this.id = id
@@ -41,6 +44,12 @@ class User() : java.io.Serializable {
             Base64.decode(this.avatar, Base64.DEFAULT)
         else
             null
+    }
+
+    fun getAvgReview(): Double {
+        val rating = receivedReviews.stream().mapToInt { r-> r.score }.average().orElse(0.0)
+        return rating.toBigDecimal().setScale(1, RoundingMode.HALF_UP).toDouble()
+//        return (receivedReviews.sumOf { r -> r.score } / receivedReviews.size).toDouble()
     }
 
     override fun toString(): String {

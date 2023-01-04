@@ -29,6 +29,8 @@ import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 
 class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
+    private val userId: Long = 3
+
     private lateinit var api: ApiInterface
     private lateinit var adapter: RideHistoryAdapter
     private lateinit var rcView: RecyclerView
@@ -60,6 +62,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
         profileText = findViewById(R.id.profileName)
         cardNumber = findViewById(R.id.cardNumber)
+        avgReview = findViewById(R.id.avgReview)
         avatar = findViewById(R.id.profileAvatar)
         logoutButton = findViewById(R.id.logoutButton)
         changeCardNumberButton = findViewById(R.id.changeCardNumberButton)
@@ -69,7 +72,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
         // Listeners
         refreshLayout.setOnRefreshListener {
-            updateRideHistory()
+            updateRideHistory(userId)
             Handler().postDelayed({
                 refreshLayout.isRefreshing = false
             }, 500)
@@ -100,21 +103,16 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
 
     override fun onStart() {
         super.onStart()
-        // из всех отзывов оставленных этому юзеру считаем средний
-        getUserById(1)
-        avgReview = findViewById(R.id.avgReview)
-        val review = 1.5f
-        avgReview.text = "Средняя оценка: $review"
 
-        updateRideHistory()
+        // из всех отзывов оставленных этому юзеру считаем средний
+        getUserById(userId)
+        updateRideHistory(userId)
     }
 
 
     // API Requests
-    private fun updateRideHistory() {
+    private fun updateRideHistory(userId: Long) {
         // Get User Id from Auth User
-        val userId: Long = 1
-
         api.getUserRideHistory(userId).enqueue(object : Callback<MutableList<Ride>> {
             override fun onFailure(call: Call<MutableList<Ride>>, t: Throwable) {
                 val dialog: AlertDialog = this@ProfileActivity.let {
@@ -161,6 +159,7 @@ class ProfileActivity : AppCompatActivity(), RideHistoryAdapter.ItemListener {
             ) {
                 user = response.body() as User
                 profileText.text = user.name + " " + user.surname
+                avgReview.text = "Средняя оценка: ${user.getAvgReview()}"
                 cardNumber.text = user.cardNumber
                 editAvatarBitmap(avatar, user)
 

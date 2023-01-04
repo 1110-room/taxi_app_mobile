@@ -4,23 +4,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import room1110.taxi_app.R
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
 import room1110.taxi_app.util.AvatarConvert.editAvatarBitmap
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.coroutineContext
-import kotlin.coroutines.suspendCoroutine
 
 class RideActivity : AppCompatActivity() {
     private lateinit var api: ApiInterface
