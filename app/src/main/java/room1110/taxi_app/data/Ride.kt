@@ -20,7 +20,7 @@ class Ride() : java.io.Serializable {
     var rideSize: Int = 0
 
     @SerializedName("members")
-    var members: ArrayList<User>? = arrayListOf()
+    var members: ArrayList<User> = arrayListOf()
 
     @SerializedName("address_from")
     var addressFrom: String = ""
@@ -41,7 +41,7 @@ class Ride() : java.io.Serializable {
     private var dtTo: String? = null
 
     fun getMembersCount(): Int {
-        return if (members == null) 1 else members!!.size + 1
+        return if (members.isEmpty()) 1 else members.size + 1
     }
 
     fun getDtFrom(): LocalDateTime? {
@@ -53,6 +53,10 @@ class Ride() : java.io.Serializable {
             null
         else
             LocalDateTime.parse(dtTo)
+    }
+
+    fun isRideMember(user: User): Boolean {
+        return this.owner.id == user.id || this.members.any { m -> m.id == user.id }
     }
 
     override fun toString(): String {
@@ -73,7 +77,7 @@ class Ride() : java.io.Serializable {
     }
 }
 
-data class  RideRequest(
+data class RideRequest(
     @SerializedName("owner")
     var owner: User,
 
@@ -90,6 +94,10 @@ data class  RideRequest(
     var taxiService: String
 )
 
+data class UserRideRequest(
+    var user: User,
+    var ride: Ride
+)
 
 /*
 {

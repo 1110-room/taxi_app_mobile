@@ -60,7 +60,7 @@ class EditCardNumberActivity : AppCompatActivity() {
             ) {
                 val intent = Intent().putExtra("newCardNumber", user.cardNumber)
                 setResult(RESULT_OK, intent)
-                finish()
+                this@EditCardNumberActivity.finish()
             }
         })
     }

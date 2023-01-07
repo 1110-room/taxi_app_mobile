@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/roomText"
+        android:text="@string/room_text"
         android:textColor="#FFB300"
         android:textSize="38sp"
         android:textStyle="bold|italic"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/statusTV"
+            android:text="@string/status_TV"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/membersCountTV"
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/serviceTV"
+            android:text="@string/service_TV"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/statusTV"
@@ -144,7 +144,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="@string/membersCountTV"
+            android:text="@string/members_count_TV"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/priceTV"
@@ -307,5 +307,18 @@
         app:layout_constraintEnd_toEndOf="@+id/membersLayout"
         app:layout_constraintStart_toStartOf="@+id/membersLayout"
         app:layout_constraintTop_toBottomOf="@+id/membersLayout" />
+
+    <ImageButton
+        android:id="@+id/exitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        android:background="?android:attr/panelBackground"
+        android:rotationY="180"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/exit_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

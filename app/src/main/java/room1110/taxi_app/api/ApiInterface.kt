@@ -1,12 +1,13 @@
 package room1110.taxi_app.api
 
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 import room1110.taxi_app.data.Ride
-import retrofit2.http.*
 import room1110.taxi_app.data.RideRequest
 import room1110.taxi_app.data.User
+import room1110.taxi_app.data.UserRideRequest
 
 interface ApiInterface {
 
@@ -32,7 +33,16 @@ interface ApiInterface {
     // do suspend (async)
     fun createRide(@Body newRide: RideRequest): Call<Ride>
 
+    @POST("ride/leave_owner")
+    @Headers("Content-type: application/json")
+    fun ownerLeaveRide(@Body ride: Ride): Call<ResponseBody>
+
+    @PUT("ride/leave_member")
+    @Headers("Content-type: application/json")
+    fun userLeaveRide(@Body data: UserRideRequest): Call<Ride>
+
     @PUT("users/change-card")
     @Headers("Content-type: application/json")
     fun changeCard(@Body user: User): Call<User>
+
 }

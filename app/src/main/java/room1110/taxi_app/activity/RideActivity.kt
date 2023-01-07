@@ -1,22 +1,28 @@
 package room1110.taxi_app.activity
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import room1110.taxi_app.R
 import room1110.taxi_app.api.APIBuilder
 import room1110.taxi_app.api.ApiInterface
 import room1110.taxi_app.data.Ride
 import room1110.taxi_app.data.User
+import room1110.taxi_app.data.UserRideRequest
 import room1110.taxi_app.util.AvatarConvert.editAvatarBitmap
+
 
 class RideActivity : AppCompatActivity() {
     private lateinit var api: ApiInterface
@@ -24,6 +30,7 @@ class RideActivity : AppCompatActivity() {
     private var ride: Ride? = null
 
     private lateinit var activeButton: Button
+    private lateinit var exitButton: ImageButton
 
     private lateinit var addressTo: TextView
     private lateinit var addressFrom: TextView
@@ -54,6 +61,9 @@ class RideActivity : AppCompatActivity() {
         // View Elements
         activeButton = findViewById(R.id.rideActiveButton)
 
+        exitButton = findViewById(R.id.exitButton)
+        exitButton.visibility = View.INVISIBLE
+
         addressFrom = findViewById(R.id.rideAddressFrom)
         addressTo = findViewById(R.id.rideAddressTo)
         price = findViewById(R.id.ridePrice)
@@ -78,33 +88,73 @@ class RideActivity : AppCompatActivity() {
         }
 
         // Listeners
-        activeButton.setOnClickListener {
-            when (user.rideStatus) {
-                0 -> {
-                    user.rideStatus = 1
-                    ride?.members?.let {
-                        it.add(user)
-                    } ?: run {
-                        ride?.members = arrayListOf(user)
+        exitButton.setOnClickListener {
+            if (user.ready) {
+                // notf to not ready to leave
+                Toast.makeText(
+                    applicationContext,
+                    R.string.not_ready_notf,
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // accept leave dialog
+                val dialog = AlertDialog.Builder(
+                    this@RideActivity
+                ).setTitle("Выход")
+                    .setMessage("Уверены?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .create()
+                dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK") { _, _ ->
+                    // leave ride for user request
+                    ride?.let { ride ->
+                        if (user.id == ride.owner.id) {
+                            ownerLeaveRide(ride)
+                        } else {
+                            userLeaveRide(ride, user)
+                        }
                     }
-                    // update user & ride request (web-socket)
+                    this@RideActivity.finish()
                 }
-                1 -> {
-                    if (ride?.getMembersCount() == ride?.rideSize) {
-                        user.ready = !user.ready
-                        // update user request (web-socket)
-                    }
+                dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { dlg, _ ->
+                    dlg.cancel()
                 }
+                dialog.show()
             }
-
-            invalidate()
         }
+
+        activeButton.setOnClickListener {
+            it.isClickable = false
+            ride?.let { ride ->
+                when (user.rideStatus) {
+                    // if not in ride
+                    0 -> {
+                        user.rideStatus = 1
+                        if (ride.members.isNotEmpty()) {
+                            ride.members.add(user)
+                        } else {
+                            ride.members = arrayListOf(user)
+                        }
+                        // update user & ride request (web-socket)
+                    }
+                    // if in ride
+                    1 -> {
+                        if (ride.getMembersCount() == ride.rideSize) {
+                            user.ready = !user.ready
+                            // update user request (web-socket)
+                        }
+                    }
+                }
+                invalidate()
+            }
+            it.postDelayed({ it.isClickable = true }, 1000)
+        }
+
     }
 
     override fun onStart() {
         super.onStart()
 
-        getUser(1)
+        getUser(2)
         ride = intent.getSerializableExtra("ride") as Ride?
 
         invalidate()
@@ -119,14 +169,27 @@ class RideActivity : AppCompatActivity() {
     }
 
     private fun invalidateActiveButton(ride: Ride) {
+        activeButton.visibility = View.VISIBLE
+
         when (user.rideStatus) {
-            0 -> activeButton.text = "Присоединиться"
+            // if not in ride
+            0 -> {
+                activeButton.text = "Присоединиться"
+            }
+            // if in ride
             1 -> {
-                val readyText = if (user.ready) "Не готов" else "Готов"
-                if (ride.getMembersCount() == ride.rideSize)
-                    activeButton.text = readyText
-                else
-                    activeButton.text = "Ожидание"
+                if (ride.isRideMember(user)) {
+                    exitButton.visibility = View.VISIBLE
+
+                    val readyText = if (user.ready) "Не готов" else "Готов"
+                    if (ride.getMembersCount() == ride.rideSize) {
+                        activeButton.text = readyText
+                    } else {
+                        activeButton.text = "Ожидание"
+                    }
+                } else {
+                    activeButton.visibility = View.INVISIBLE
+                }
             }
         }
     }
@@ -141,13 +204,11 @@ class RideActivity : AppCompatActivity() {
     }
 
     private fun invalidateMembers(ride: Ride) {
-        ride.owner?.let {
-            editAvatarBitmap(owner, it)
-            ownerName.text = it.name
-        }
+        editAvatarBitmap(owner, ride.owner)
+        ownerName.text = ride.owner.name
 
         for ((i, member) in members.withIndex()) {
-            ride.members?.getOrNull(i)?.let {
+            ride.members.getOrNull(i)?.let {
                 membersNames[i].text = it.name
                 membersNames[i].visibility = View.VISIBLE
                 member.visibility = View.VISIBLE
@@ -179,4 +240,42 @@ class RideActivity : AppCompatActivity() {
         }
     }
 
+    private fun userLeaveRide(ride: Ride, user: User) {
+        val data = UserRideRequest(user, ride)
+        api.userLeaveRide(data).enqueue(object : Callback<Ride> {
+            override fun onFailure(call: Call<Ride>, t: Throwable) {
+                AlertDialog.Builder(this@RideActivity)
+                    .setMessage(t.message.toString())
+                    .setTitle("Error")
+                    .create()
+                    .show()
+            }
+
+            override fun onResponse(
+                call: Call<Ride>,
+                response: Response<Ride>
+            ) {
+                this@RideActivity.finish()
+            }
+        })
+    }
+
+    private fun ownerLeaveRide(ride: Ride) {
+        api.ownerLeaveRide(ride).enqueue(object : Callback<ResponseBody> {
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                AlertDialog.Builder(this@RideActivity)
+                    .setMessage(t.message.toString())
+                    .setTitle("Error")
+                    .create()
+                    .show()
+            }
+
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+                this@RideActivity.finish()
+            }
+        })
+    }
 }

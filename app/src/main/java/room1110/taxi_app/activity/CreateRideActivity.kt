@@ -140,7 +140,7 @@ class CreateRideActivity : AppCompatActivity() {
         })
     }
 
-    fun EditText.validate(message: String, validator: (String) -> Boolean) {
+    private fun EditText.validate(message: String, validator: (String) -> Boolean) {
         this.doAfterTextChanged {
             this.error = if (validator(it.toString())) null else message
         }

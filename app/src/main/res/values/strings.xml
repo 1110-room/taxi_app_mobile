@@ -2,28 +2,28 @@
     <string name="app_name">taxi_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="Logout">Выйти</string>
-    <string name="profileButton">Профиль</string>
-    <string name="changeCardNumber">Изменить карту</string>
-    <string name="textView5">История поездок</string>
-    <string name="saveChangesButton">Сохранить изименения</string>
-    <string name="changeCardNumberText">Введите номер карты</string>
-    <string name="roomText">ПОЕЗДКА</string>
+    <string name="logout">Выйти</string>
+    <string name="profile_button">Профиль</string>
+    <string name="change_card_number">Изменить карту</string>
+    <string name="save_changes_button">Сохранить изименения</string>
+    <string name="change_card_number_text">Введите номер карты</string>
+    <string name="room_text">ПОЕЗДКА</string>
     <string name="from">Откуда:</string>
     <string name="to">Куда:</string>
     <string name="price">Цена:</string>
     <string name="create">Создать</string>
-    <string name="membersCount">Кол-во человек:</string>
-    <string name="creationRide">Создание поездки</string>
-    <string name="addressFromText">Откуда:</string>
-    <string name="addressFromHint">ул. Кремлевская 35</string>
-    <string name="addressToText">Куда:</string>
-    <string name="addressToHint">ул. Деревня Универсиады 5</string>
-    <string name="serviceText">Такси сервис:</string>
-    <string name="membersCountTV">Участников:</string>
-    <string name="statusTV">Статус:</string>
-    <string name="serviceTV">Сервис:</string>
-    <string name="rideHistoryText">История поездок</string>
+    <string name="members_count">Кол-во человек:</string>
+    <string name="creation_ride">Создание поездки</string>
+    <string name="address_from_text">Откуда:</string>
+    <string name="address_from_hint">ул. Кремлевская 35</string>
+    <string name="address_to_text">Куда:</string>
+    <string name="address_to_hint">ул. Деревня Универсиады 5</string>
+    <string name="service_text">Такси сервис:</string>
+    <string name="members_count_TV">Участников:</string>
+    <string name="status_TV">Статус:</string>
+    <string name="service_TV">Сервис:</string>
+    <string name="ride_history_text">История поездок</string>
+    <string name="not_ready_notf">Выйдите из режима готовности</string>
 
 
 </resources>
